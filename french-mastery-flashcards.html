@@ -1,0 +1,7093 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>French Mastery — A1 to C2 Flashcards</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --ink: #0f0e0a;
+  --paper: #f9f6f0;
+  --parchment: #f0ead8;
+  --gold: #b8922a;
+  --gold-pale: #e8d9b0;
+  --rouge: #8b2635;
+  --rouge-pale: #f2d9dc;
+  --sage: #3d6b50;
+  --sage-pale: #d4e8db;
+  --slate: #2c3e52;
+  --slate-pale: #d8e4f0;
+  --violet: #5c3472;
+  --violet-pale: #e8d9f0;
+  --card-h: 300px;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--paper);
+  color: var(--ink);
+  min-height: 100vh;
+  background-image:
+    url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c4aa70' fill-opacity='0.05'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+}
+
+/* ─── HEADER ──────────────────────────────────────────── */
+.site-header {
+  background: var(--ink);
+  color: var(--paper);
+  text-align: center;
+  padding: 2.5rem 1.5rem 2rem;
+  position: relative;
+  overflow: hidden;
+}
+
+.site-header::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse at 30% 0%, rgba(184,146,42,0.25) 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 100%, rgba(139,38,53,0.2) 0%, transparent 55%);
+}
+
+.header-inner { position: relative; z-index: 1; }
+
+.flag-row { font-size: 1.8rem; margin-bottom: 0.6rem; letter-spacing: 0.2em; }
+
+.site-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(2rem, 5vw, 3.2rem);
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.site-title em {
+  font-style: italic;
+  color: var(--gold-pale);
+}
+
+.site-subtitle {
+  font-size: 0.8rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(249,246,240,0.5);
+  margin-top: 0.6rem;
+}
+
+.deck-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-top: 1.4rem;
+}
+
+.dstat { text-align: center; }
+.dstat-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--gold-pale);
+  line-height: 1;
+}
+.dstat-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: rgba(249,246,240,0.45);
+}
+
+/* ─── LEVEL TABS ──────────────────────────────────────── */
+.level-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.4rem;
+  padding: 1.2rem 1rem 0;
+  flex-wrap: wrap;
+}
+
+.level-btn {
+  padding: 0.35rem 1.1rem;
+  border-radius: 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  cursor: pointer;
+  border: 2px solid transparent;
+  transition: all 0.18s;
+}
+
+.level-btn[data-lv="A1"] { background: var(--sage-pale); color: var(--sage); border-color: var(--sage-pale); }
+.level-btn[data-lv="A2"] { background: var(--slate-pale); color: var(--slate); border-color: var(--slate-pale); }
+.level-btn[data-lv="B1"] { background: var(--gold-pale); color: #7a5c14; border-color: var(--gold-pale); }
+.level-btn[data-lv="B2"] { background: var(--rouge-pale); color: var(--rouge); border-color: var(--rouge-pale); }
+.level-btn[data-lv="C1"] { background: var(--violet-pale); color: var(--violet); border-color: var(--violet-pale); }
+.level-btn[data-lv="C2"] { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+.level-btn[data-lv="All"] { background: var(--parchment); color: var(--ink); border-color: var(--gold-pale); }
+
+.level-btn.active, .level-btn:hover {
+  opacity: 1;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+  transform: translateY(-1px);
+}
+.level-btn:not(.active) { opacity: 0.65; }
+
+/* ─── CATEGORY FILTER ─────────────────────────────────── */
+.cat-filter {
+  display: flex;
+  gap: 0.4rem;
+  padding: 0.8rem 1rem 0;
+  overflow-x: auto;
+  scrollbar-width: none;
+  justify-content: center;
+  flex-wrap: wrap;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.cat-btn {
+  padding: 0.28rem 0.85rem;
+  border-radius: 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.72rem;
+  cursor: pointer;
+  border: 1.5px solid var(--gold-pale);
+  background: transparent;
+  color: #555;
+  transition: all 0.15s;
+  white-space: nowrap;
+}
+.cat-btn:hover { border-color: var(--gold); color: var(--ink); }
+.cat-btn.active { background: var(--ink); color: var(--paper); border-color: var(--ink); }
+
+/* ─── PROGRESS ────────────────────────────────────────── */
+.progress-wrap {
+  max-width: 600px;
+  margin: 1rem auto 0;
+  padding: 0 1.5rem;
+}
+
+.progress-info {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: #888;
+  margin-bottom: 0.4rem;
+}
+
+.progress-track {
+  height: 3px;
+  background: var(--gold-pale);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--gold), var(--rouge));
+  transition: width 0.4s ease;
+  border-radius: 2px;
+}
+
+/* ─── CARD AREA ───────────────────────────────────────── */
+.card-area {
+  display: flex;
+  justify-content: center;
+  padding: 1.2rem 1.5rem 0.5rem;
+  perspective: 1400px;
+}
+
+.card-wrapper {
+  width: 100%;
+  max-width: 580px;
+  height: var(--card-h);
+  cursor: pointer;
+  user-select: none;
+}
+
+.card {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.55s cubic-bezier(0.34, 1.2, 0.64, 1);
+}
+
+.card.flipped { transform: rotateY(180deg); }
+
+.card-face {
+  position: absolute;
+  inset: 0;
+  backface-visibility: hidden;
+  border-radius: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem 2.5rem;
+  text-align: center;
+}
+
+/* front */
+.card-front {
+  background: white;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.04), 0 8px 32px rgba(0,0,0,0.08);
+  border: 1px solid rgba(184,146,42,0.12);
+}
+
+.card-front::before {
+  content: '';
+  position: absolute;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+  border-radius: 18px 18px 0 0;
+  background: linear-gradient(90deg, var(--level-color, var(--gold)), var(--level-color2, var(--rouge)));
+}
+
+/* back */
+.card-back {
+  background: var(--ink);
+  transform: rotateY(180deg);
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1), 0 12px 40px rgba(0,0,0,0.2);
+}
+
+.card-back::after {
+  content: '';
+  position: absolute;
+  inset: 1px;
+  border-radius: 17px;
+  border: 1px solid rgba(184,146,42,0.15);
+  pointer-events: none;
+}
+
+/* Level badge */
+.level-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.18rem 0.65rem;
+  border-radius: 2rem;
+  font-size: 0.65rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 0.7rem;
+}
+
+.card-front .level-badge {
+  background: var(--level-bg, var(--gold-pale));
+  color: var(--level-color, #7a5c14);
+}
+
+.card-back .level-badge {
+  background: rgba(255,255,255,0.08);
+  color: rgba(255,255,255,0.5);
+}
+
+.card-cat {
+  font-size: 0.68rem;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #bbb;
+  margin-bottom: 0.9rem;
+}
+
+.card-front .card-cat { color: #999; }
+
+.card-question {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 3vw, 1.65rem);
+  font-weight: 600;
+  color: var(--ink);
+  line-height: 1.35;
+}
+
+.card-hint {
+  font-size: 0.78rem;
+  color: #bbb;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+.flip-nudge {
+  position: absolute;
+  bottom: 1.2rem;
+  font-size: 0.68rem;
+  color: #ccc;
+  letter-spacing: 0.1em;
+}
+
+.card-answer {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(1.2rem, 3vw, 1.7rem);
+  font-weight: 600;
+  font-style: italic;
+  color: var(--gold-pale);
+  line-height: 1.35;
+  margin-bottom: 0.6rem;
+}
+
+.card-note {
+  font-size: 0.8rem;
+  color: rgba(249,246,240,0.5);
+  line-height: 1.6;
+  max-width: 400px;
+}
+
+/* ─── SCORE BUTTONS ───────────────────────────────────── */
+.score-row {
+  display: flex;
+  justify-content: center;
+  gap: 0.8rem;
+  padding: 0.6rem 1rem;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.score-row.visible { opacity: 1; pointer-events: auto; }
+
+.s-btn {
+  padding: 0.45rem 1.4rem;
+  border-radius: 2rem;
+  font-family: 'Jost', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1.5px solid;
+  transition: all 0.18s;
+}
+
+.s-hard { border-color: var(--rouge); color: var(--rouge); background: transparent; }
+.s-hard:hover { background: var(--rouge); color: white; }
+.s-good { border-color: var(--slate); color: var(--slate); background: transparent; }
+.s-good:hover { background: var(--slate); color: white; }
+.s-easy { border-color: var(--sage); color: var(--sage); background: transparent; }
+.s-easy:hover { background: var(--sage); color: white; }
+
+/* ─── CONTROLS ────────────────────────────────────────── */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.8rem;
+  padding: 0.3rem 1rem 0.5rem;
+}
+
+.c-btn {
+  border: none;
+  cursor: pointer;
+  font-family: 'Jost', sans-serif;
+  transition: all 0.18s;
+}
+
+.c-nav {
+  width: 44px; height: 44px;
+  border-radius: 50%;
+  background: white;
+  border: 1.5px solid rgba(0,0,0,0.1);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 1rem;
+  color: var(--ink);
+}
+.c-nav:hover { border-color: var(--ink); background: var(--ink); color: white; }
+
+.c-flip {
+  padding: 0.6rem 2rem;
+  border-radius: 2rem;
+  background: var(--ink);
+  color: var(--paper);
+  font-size: 0.85rem;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+}
+.c-flip:hover { background: var(--slate); }
+
+.c-shuffle {
+  padding: 0.5rem 1.2rem;
+  border-radius: 2rem;
+  background: transparent;
+  border: 1.5px solid var(--gold-pale);
+  color: #777;
+  font-size: 0.75rem;
+  display: block;
+  margin: 0 auto 0.5rem;
+}
+.c-shuffle:hover { border-color: var(--gold); color: var(--ink); }
+
+/* ─── SESSION STATS ───────────────────────────────────── */
+.session-stats {
+  display: flex;
+  justify-content: center;
+  gap: 2.5rem;
+  padding: 0.5rem 1rem 2rem;
+}
+.ss { text-align: center; }
+.ss-num {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 1.6rem;
+  font-weight: 700;
+  line-height: 1;
+}
+.ss-num.hard { color: var(--rouge); }
+.ss-num.good { color: var(--slate); }
+.ss-num.easy { color: var(--sage); }
+.ss-num.total { color: var(--gold); }
+.ss-label {
+  font-size: 0.65rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #aaa;
+}
+
+/* ─── KEYBOARD HINT ───────────────────────────────────── */
+.kb-hint {
+  text-align: center;
+  font-size: 0.68rem;
+  color: #ccc;
+  padding-bottom: 1.5rem;
+  letter-spacing: 0.05em;
+}
+
+/* ─── CARD ENTER ANIM ─────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.card-wrapper { animation: fadeUp 0.3s ease; }
+
+/* ─── RESPONSIVE ──────────────────────────────────────── */
+@media(max-width: 480px) {
+  :root { --card-h: 260px; }
+  .card-face { padding: 1.5rem; }
+  .deck-stats { gap: 1.2rem; }
+}
+</style>
+</head>
+<body>
+
+<!-- HEADER -->
+<header class="site-header">
+  <div class="header-inner">
+    <div class="flag-row">🇫🇷 ✦ 🎓</div>
+    <h1 class="site-title">French <em>Mastery</em></h1>
+    <p class="site-subtitle">Complete A1 → C2 Flashcard Deck</p>
+    <div class="deck-stats">
+      <div class="dstat"><div class="dstat-num" id="total-count">797</div><div class="dstat-label">Cards</div></div>
+      <div class="dstat"><div class="dstat-num">A1–C2</div><div class="dstat-label">All Levels</div></div>
+      <div class="dstat"><div class="dstat-num" id="cat-count">—</div><div class="dstat-label">Topics</div></div>
+    </div>
+  </div>
+</header>
+
+<!-- LEVEL TABS -->
+<div class="level-tabs">
+  <button class="level-btn active" data-lv="All" onclick="setLevel('All')">All Levels</button>
+  <button class="level-btn" data-lv="A1" onclick="setLevel('A1')">A1 Beginner</button>
+  <button class="level-btn" data-lv="A2" onclick="setLevel('A2')">A2 Elementary</button>
+  <button class="level-btn" data-lv="B1" onclick="setLevel('B1')">B1 Intermediate</button>
+  <button class="level-btn" data-lv="B2" onclick="setLevel('B2')">B2 Upper-Int.</button>
+  <button class="level-btn" data-lv="C1" onclick="setLevel('C1')">C1 Advanced</button>
+  <button class="level-btn" data-lv="C2" onclick="setLevel('C2')">C2 Mastery</button>
+</div>
+
+<!-- CATEGORY FILTER -->
+<div class="cat-filter" id="cat-filter"></div>
+
+<!-- PROGRESS -->
+<div class="progress-wrap">
+  <div class="progress-info">
+    <span id="prog-text">Card 1 of 1</span>
+    <span id="prog-pct">0%</span>
+  </div>
+  <div class="progress-track"><div class="progress-fill" id="prog-fill" style="width:0%"></div></div>
+</div>
+
+<!-- FLASHCARD -->
+<div class="card-area">
+  <div class="card-wrapper" id="card-wrapper" onclick="flip()">
+    <div class="card" id="card">
+      <!-- FRONT -->
+      <div class="card-face card-front">
+        <div class="level-badge" id="f-badge"></div>
+        <div class="card-cat" id="f-cat"></div>
+        <div class="card-question" id="f-q"></div>
+        <div class="card-hint" id="f-hint"></div>
+        <div class="flip-nudge">⟳ tap to reveal answer</div>
+      </div>
+      <!-- BACK -->
+      <div class="card-face card-back">
+        <div class="level-badge" id="b-badge"></div>
+        <div class="card-cat" id="b-cat"></div>
+        <div class="card-answer" id="b-ans"></div>
+        <div class="card-note" id="b-note"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- SCORE BUTTONS -->
+<div class="score-row" id="score-row">
+  <button class="s-btn s-hard" onclick="rate('hard')">😅 Hard</button>
+  <button class="s-btn s-good" onclick="rate('good')">🙂 Good</button>
+  <button class="s-btn s-easy" onclick="rate('easy')">😊 Easy</button>
+</div>
+
+<!-- CONTROLS -->
+<div class="controls">
+  <button class="c-btn c-nav" onclick="prev()">←</button>
+  <button class="c-btn c-flip" onclick="flip()">Reveal Answer</button>
+  <button class="c-btn c-nav" onclick="next()">→</button>
+</div>
+<div style="text-align:center;padding-top:0.4rem">
+  <button class="c-btn c-shuffle" onclick="shuffle()">🔀 Shuffle Deck</button>
+</div>
+
+<!-- SESSION STATS -->
+<div class="session-stats">
+  <div class="ss"><div class="ss-num hard" id="cnt-hard">0</div><div class="ss-label">Hard</div></div>
+  <div class="ss"><div class="ss-num total" id="cnt-total">0</div><div class="ss-label">Reviewed</div></div>
+  <div class="ss"><div class="ss-num good" id="cnt-good">0</div><div class="ss-label">Good</div></div>
+  <div class="ss"><div class="ss-num easy" id="cnt-easy">0</div><div class="ss-label">Easy</div></div>
+</div>
+
+<p class="kb-hint">← → to navigate · Space to flip · 1 Hard · 2 Good · 3 Easy</p>
+
+<!-- ─── DATA ─────────────────────────────────────────── -->
+<script>
+const ALL_CARDS = [
+  {
+    "cat": "Greetings",
+    "level": "A1",
+    "q": "How do you say 'Hello' (formal & informal)?",
+    "hint": "",
+    "a": "Bonjour / Salut",
+    "note": "Bonjour anytime; Salut among friends."
+  },
+  {
+    "cat": "Greetings",
+    "level": "A1",
+    "q": "How do you say 'Good evening'?",
+    "hint": "",
+    "a": "Bonsoir",
+    "note": "Used from late afternoon onward."
+  },
+  {
+    "cat": "Greetings",
+    "level": "A1",
+    "q": "How do you say 'Goodbye' (formal) and 'See you soon'?",
+    "hint": "",
+    "a": "Au revoir / À bientôt",
+    "note": "À tout à l'heure = see you later (same day)."
+  },
+  {
+    "cat": "Greetings",
+    "level": "A1",
+    "q": "How do you ask 'How are you?' formally?",
+    "hint": "",
+    "a": "Comment allez-vous ?",
+    "note": "Informal: Ça va ? — very common."
+  },
+  {
+    "cat": "Greetings",
+    "level": "A1",
+    "q": "Reply: 'I'm fine, thank you'",
+    "hint": "",
+    "a": "Je vais bien, merci.",
+    "note": "Also: Ça va bien, merci."
+  },
+  {
+    "cat": "Greetings",
+    "level": "A1",
+    "q": "'Please' and 'Thank you'",
+    "hint": "",
+    "a": "S'il vous plaît / Merci",
+    "note": "S'il te plaît = informal. De rien = you're welcome."
+  },
+  {
+    "cat": "Greetings",
+    "level": "A1",
+    "q": "'Excuse me / Sorry'",
+    "hint": "",
+    "a": "Excusez-moi / Pardon",
+    "note": "Excusez-moi to get attention; Pardon for light apology."
+  },
+  {
+    "cat": "Greetings",
+    "level": "A1",
+    "q": "'You're welcome' / 'Don't mention it'",
+    "hint": "",
+    "a": "De rien / Je vous en prie",
+    "note": "Je vous en prie is more formal."
+  },
+  {
+    "cat": "Introductions",
+    "level": "A1",
+    "q": "'My name is…'",
+    "hint": "",
+    "a": "Je m'appelle…",
+    "note": "Literally 'I call myself'."
+  },
+  {
+    "cat": "Introductions",
+    "level": "A1",
+    "q": "'What is your name?' (formal)",
+    "hint": "",
+    "a": "Comment vous appelez-vous ?",
+    "note": "Informal: Tu t'appelles comment ?"
+  },
+  {
+    "cat": "Introductions",
+    "level": "A1",
+    "q": "'I am (nationality)' e.g. English",
+    "hint": "",
+    "a": "Je suis anglais(e).",
+    "note": "Nationalities not capitalised in French."
+  },
+  {
+    "cat": "Introductions",
+    "level": "A1",
+    "q": "'I am from…'",
+    "hint": "",
+    "a": "Je viens de…",
+    "note": "Je viens du Canada / de France / des États-Unis."
+  },
+  {
+    "cat": "Introductions",
+    "level": "A1",
+    "q": "'I am … years old'",
+    "hint": "",
+    "a": "J'ai … ans.",
+    "note": "Use avoir for age, not être!"
+  },
+  {
+    "cat": "Introductions",
+    "level": "A1",
+    "q": "'Nice to meet you'",
+    "hint": "",
+    "a": "Enchanté(e).",
+    "note": "Add -e for feminine speaker."
+  },
+  {
+    "cat": "Introductions",
+    "level": "A1",
+    "q": "'I live in…'",
+    "hint": "",
+    "a": "J'habite à / en / au…",
+    "note": "à Paris, en France, au Canada."
+  },
+  {
+    "cat": "Introductions",
+    "level": "A1",
+    "q": "'I work as a…' / 'I am a student'",
+    "hint": "",
+    "a": "Je travaille comme… / Je suis étudiant(e).",
+    "note": "No article before profession with être."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "A1",
+    "q": "What are the French subject pronouns?",
+    "hint": "",
+    "a": "je, tu, il, elle, on, nous, vous, ils, elles",
+    "note": "On = one/we (informal). Vous = formal singular OR plural."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "A1",
+    "q": "Stressed/tonic pronouns",
+    "hint": "",
+    "a": "moi, toi, lui, elle, nous, vous, eux, elles",
+    "note": "Used after prepositions: avec moi, chez lui."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A1",
+    "q": "Conjugate ÊTRE (present)",
+    "hint": "",
+    "a": "je suis, tu es, il/elle est, nous sommes, vous êtes, ils/elles sont",
+    "note": "Most essential verb. Also used for descriptions, origins."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A1",
+    "q": "Conjugate AVOIR (present)",
+    "hint": "",
+    "a": "j'ai, tu as, il/elle a, nous avons, vous avez, ils/elles ont",
+    "note": "Used for age, hunger, thirst, possession."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A1",
+    "q": "Conjugate ALLER (present) – irregular",
+    "hint": "",
+    "a": "je vais, tu vas, il va, nous allons, vous allez, ils vont",
+    "note": "Near future: je vais manger = I'm going to eat."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A1",
+    "q": "Conjugate regular -ER verb: PARLER",
+    "hint": "",
+    "a": "je parle, tu parles, il parle, nous parlons, vous parlez, ils parlent",
+    "note": "Stem + -e, -es, -e, -ons, -ez, -ent."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A1",
+    "q": "Conjugate regular -IR verb: FINIR",
+    "hint": "",
+    "a": "je finis, tu finis, il finit, nous finissons, vous finissez, ils finissent",
+    "note": "-IR verbs: add -iss- in plural forms."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A1",
+    "q": "Conjugate regular -RE verb: VENDRE",
+    "hint": "",
+    "a": "je vends, tu vends, il vend, nous vendons, vous vendez, ils vendent",
+    "note": "-RE verbs: no ending on il/elle form."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A1",
+    "q": "Conjugate FAIRE (present)",
+    "hint": "",
+    "a": "je fais, tu fais, il fait, nous faisons, vous faites, ils font",
+    "note": "faites is irregular — must memorise."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A1",
+    "q": "Conjugate VOULOIR (present)",
+    "hint": "",
+    "a": "je veux, tu veux, il veut, nous voulons, vous voulez, ils veulent",
+    "note": "Je voudrais is the polite conditional form."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A1",
+    "q": "Conjugate POUVOIR (present)",
+    "hint": "",
+    "a": "je peux, tu peux, il peut, nous pouvons, vous pouvez, ils peuvent",
+    "note": "Je peux = I can. Je ne peux pas = I cannot."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A1",
+    "q": "Conjugate VENIR (present)",
+    "hint": "",
+    "a": "je viens, tu viens, il vient, nous venons, vous venez, ils viennent",
+    "note": "Je viens de Paris = I'm from Paris / I've just come from Paris."
+  },
+  {
+    "cat": "Grammar: Articles",
+    "level": "A1",
+    "q": "Definite articles (the)",
+    "hint": "",
+    "a": "le (m.), la (f.), l' (vowel/h), les (pl.)",
+    "note": "le chat, la maison, l'ami, les enfants."
+  },
+  {
+    "cat": "Grammar: Articles",
+    "level": "A1",
+    "q": "Indefinite articles (a/an/some)",
+    "hint": "",
+    "a": "un (m.), une (f.), des (pl.)",
+    "note": "un livre, une table, des amis."
+  },
+  {
+    "cat": "Grammar: Articles",
+    "level": "A1",
+    "q": "Partitive articles (some – uncountable)",
+    "hint": "",
+    "a": "du (m.), de la (f.), de l' (vowel), des (pl.)",
+    "note": "Je mange du pain. Je bois de l'eau."
+  },
+  {
+    "cat": "Grammar: Articles",
+    "level": "A1",
+    "q": "After negation, articles become…",
+    "hint": "",
+    "a": "de / d'",
+    "note": "Je n'ai pas de pain. Il n'y a pas d'eau."
+  },
+  {
+    "cat": "Grammar: Adjectives",
+    "level": "A1",
+    "q": "How do adjectives agree in French?",
+    "hint": "",
+    "a": "Add -e (fem.), -s (masc.pl.), -es (fem.pl.)",
+    "note": "petit → petite, petits, petites."
+  },
+  {
+    "cat": "Grammar: Adjectives",
+    "level": "A1",
+    "q": "Position of adjectives – general rule",
+    "hint": "",
+    "a": "Most adjectives come AFTER the noun",
+    "note": "une voiture rouge. Exception: BAGS adjectives before."
+  },
+  {
+    "cat": "Grammar: Adjectives",
+    "level": "A1",
+    "q": "BAGS adjectives (before noun) – give examples",
+    "hint": "",
+    "a": "Beauty, Age, Goodness, Size: beau, nouveau, vieux, bon, mauvais, grand, petit, jeune",
+    "note": "une belle maison, un grand homme."
+  },
+  {
+    "cat": "Grammar: Negation",
+    "level": "A1",
+    "q": "Basic negation structure",
+    "hint": "",
+    "a": "ne … pas around the verb",
+    "note": "Je parle → Je ne parle pas. (n' before vowel)"
+  },
+  {
+    "cat": "Grammar: Negation",
+    "level": "A1",
+    "q": "'I don't understand / I don't know'",
+    "hint": "",
+    "a": "Je ne comprends pas. / Je ne sais pas.",
+    "note": "Very high-frequency phrases."
+  },
+  {
+    "cat": "Grammar: Questions",
+    "level": "A1",
+    "q": "Three ways to form a yes/no question",
+    "hint": "",
+    "a": "Intonation ↗ / Est-ce que… / Inversion",
+    "note": "Tu parles? / Est-ce que tu parles? / Parles-tu?"
+  },
+  {
+    "cat": "Grammar: Questions",
+    "level": "A1",
+    "q": "Question words: who, what, where, when, why, how",
+    "hint": "",
+    "a": "qui, quoi/que, où, quand, pourquoi, comment",
+    "note": "Comment vous appelez-vous? Où habitez-vous?"
+  },
+  {
+    "cat": "Grammar: Questions",
+    "level": "A1",
+    "q": "'How much / how many'",
+    "hint": "",
+    "a": "Combien (de)",
+    "note": "Combien ça coûte? Combien de frères as-tu?"
+  },
+  {
+    "cat": "Grammar: Questions",
+    "level": "A1",
+    "q": "'Which / what' (adjective)",
+    "hint": "",
+    "a": "quel/quelle/quels/quelles",
+    "note": "Quel âge as-tu? Quelle heure est-il?"
+  },
+  {
+    "cat": "Numbers",
+    "level": "A1",
+    "q": "1–10 in French",
+    "hint": "",
+    "a": "un, deux, trois, quatre, cinq, six, sept, huit, neuf, dix",
+    "note": ""
+  },
+  {
+    "cat": "Numbers",
+    "level": "A1",
+    "q": "11–20 in French",
+    "hint": "",
+    "a": "onze, douze, treize, quatorze, quinze, seize, dix-sept, dix-huit, dix-neuf, vingt",
+    "note": ""
+  },
+  {
+    "cat": "Numbers",
+    "level": "A1",
+    "q": "Tens: 30, 40, 50, 60, 100",
+    "hint": "",
+    "a": "trente, quarante, cinquante, soixante, cent",
+    "note": ""
+  },
+  {
+    "cat": "Numbers",
+    "level": "A1",
+    "q": "Tricky numbers: 70, 80, 90",
+    "hint": "",
+    "a": "soixante-dix, quatre-vingts, quatre-vingt-dix",
+    "note": "Unique to French! 70=60+10, 80=4×20, 90=4×20+10."
+  },
+  {
+    "cat": "Numbers",
+    "level": "A1",
+    "q": "Ordinal numbers: 1st, 2nd, 3rd, 4th…",
+    "hint": "",
+    "a": "premier/première, deuxième, troisième, quatrième…",
+    "note": "Ordinals: add -ième to cardinal (except premier)."
+  },
+  {
+    "cat": "Time & Dates",
+    "level": "A1",
+    "q": "Days of the week",
+    "hint": "",
+    "a": "lundi, mardi, mercredi, jeudi, vendredi, samedi, dimanche",
+    "note": "Not capitalised. Week starts Monday."
+  },
+  {
+    "cat": "Time & Dates",
+    "level": "A1",
+    "q": "Months of the year",
+    "hint": "",
+    "a": "janvier, février, mars, avril, mai, juin, juillet, août, septembre, octobre, novembre, décembre",
+    "note": "Not capitalised."
+  },
+  {
+    "cat": "Time & Dates",
+    "level": "A1",
+    "q": "'Today, tomorrow, yesterday'",
+    "hint": "",
+    "a": "aujourd'hui, demain, hier",
+    "note": "Aujourd'hui on est lundi."
+  },
+  {
+    "cat": "Time & Dates",
+    "level": "A1",
+    "q": "Telling the time: 'It is 3:30'",
+    "hint": "",
+    "a": "Il est trois heures et demie.",
+    "note": "et quart = quarter past; moins le quart = quarter to."
+  },
+  {
+    "cat": "Time & Dates",
+    "level": "A1",
+    "q": "'In the morning / afternoon / evening'",
+    "hint": "",
+    "a": "le matin / l'après-midi / le soir",
+    "note": "Je travaille le matin."
+  },
+  {
+    "cat": "Time & Dates",
+    "level": "A1",
+    "q": "Saying the date: '15th March'",
+    "hint": "",
+    "a": "le quinze mars",
+    "note": "1st = le premier mars. No ordinals for other dates."
+  },
+  {
+    "cat": "Family",
+    "level": "A1",
+    "q": "Core family: mother, father, brother, sister, son, daughter",
+    "hint": "",
+    "a": "la mère, le père, le frère, la sœur, le fils, la fille",
+    "note": "Les parents = parents or relatives."
+  },
+  {
+    "cat": "Family",
+    "level": "A1",
+    "q": "Extended family: grandfather, grandmother, husband, wife, friend",
+    "hint": "",
+    "a": "le grand-père, la grand-mère, le mari, la femme/l'épouse, l'ami(e)",
+    "note": "Les grands-parents. Le couple = the couple."
+  },
+  {
+    "cat": "Family",
+    "level": "A1",
+    "q": "'I have a brother and two sisters'",
+    "hint": "",
+    "a": "J'ai un frère et deux sœurs.",
+    "note": "Use avoir for family members."
+  },
+  {
+    "cat": "Food & Drink",
+    "level": "A1",
+    "q": "Staples: bread, water, wine, coffee, milk, cheese, butter",
+    "hint": "",
+    "a": "le pain, l'eau, le vin, le café, le lait, le fromage, le beurre",
+    "note": ""
+  },
+  {
+    "cat": "Food & Drink",
+    "level": "A1",
+    "q": "Fruit & veg: apple, orange, tomato, potato, carrot",
+    "hint": "",
+    "a": "la pomme, l'orange, la tomate, la pomme de terre, la carotte",
+    "note": ""
+  },
+  {
+    "cat": "Food & Drink",
+    "level": "A1",
+    "q": "'I'm hungry / thirsty'",
+    "hint": "",
+    "a": "J'ai faim. / J'ai soif.",
+    "note": "Use avoir, not être."
+  },
+  {
+    "cat": "Food & Drink",
+    "level": "A1",
+    "q": "'I would like a coffee, please'",
+    "hint": "",
+    "a": "Je voudrais un café, s'il vous plaît.",
+    "note": "Polite conditional form of vouloir."
+  },
+  {
+    "cat": "Food & Drink",
+    "level": "A1",
+    "q": "Meals: breakfast, lunch, dinner",
+    "hint": "",
+    "a": "le petit-déjeuner, le déjeuner, le dîner",
+    "note": "Je prends le petit-déjeuner à 7h."
+  },
+  {
+    "cat": "Places",
+    "level": "A1",
+    "q": "Public places: town hall, hospital, school, station, shop, bank, pharmacy",
+    "hint": "",
+    "a": "la mairie, l'hôpital, l'école, la gare, le magasin, la banque, la pharmacie",
+    "note": "Où est la pharmacie?"
+  },
+  {
+    "cat": "Places",
+    "level": "A1",
+    "q": "Directions: left, right, straight, near, far",
+    "hint": "",
+    "a": "à gauche, à droite, tout droit, près de, loin de",
+    "note": "Tournez à gauche."
+  },
+  {
+    "cat": "Places",
+    "level": "A1",
+    "q": "Prepositions of place: in front of, behind, next to, between",
+    "hint": "",
+    "a": "devant, derrière, à côté de, entre",
+    "note": "La poste est à côté de la banque."
+  },
+  {
+    "cat": "Places",
+    "level": "A1",
+    "q": "'Is there a…near here?'",
+    "hint": "",
+    "a": "Est-ce qu'il y a une… près d'ici ?",
+    "note": "Il y a = there is/are."
+  },
+  {
+    "cat": "Transport",
+    "level": "A1",
+    "q": "Means of transport: bus, train, metro, taxi, plane, car, bike",
+    "hint": "",
+    "a": "le bus, le train, le métro, le taxi, l'avion, la voiture, le vélo",
+    "note": "Je prends le métro."
+  },
+  {
+    "cat": "Transport",
+    "level": "A1",
+    "q": "'A ticket to Paris, please'",
+    "hint": "",
+    "a": "Un billet pour Paris, s'il vous plaît.",
+    "note": "Aller simple / aller-retour."
+  },
+  {
+    "cat": "Weather",
+    "level": "A1",
+    "q": "Weather: hot, cold, sunny, raining, snowing, windy",
+    "hint": "",
+    "a": "Il fait chaud / froid / beau. Il pleut. Il neige. Il fait du vent.",
+    "note": "Il fait + adj for most weather."
+  },
+  {
+    "cat": "Weather",
+    "level": "A1",
+    "q": "'What's the weather like today?'",
+    "hint": "",
+    "a": "Quel temps fait-il aujourd'hui ?",
+    "note": "Il fait beau aujourd'hui!"
+  },
+  {
+    "cat": "Shopping",
+    "level": "A1",
+    "q": "'How much does this cost?' / 'It's expensive/cheap'",
+    "hint": "",
+    "a": "C'est combien ? / C'est cher / bon marché.",
+    "note": "Trop cher = too expensive."
+  },
+  {
+    "cat": "Shopping",
+    "level": "A1",
+    "q": "Colours: red, blue, green, yellow, white, black, grey, orange, pink",
+    "hint": "",
+    "a": "rouge, bleu(e), vert(e), jaune, blanc/blanche, noir(e), gris(e), orange, rose",
+    "note": "Colours agree with nouns (except orange)."
+  },
+  {
+    "cat": "Health",
+    "level": "A1",
+    "q": "'I'm ill / I have a headache / I have a cold'",
+    "hint": "",
+    "a": "Je suis malade. / J'ai mal à la tête. / J'ai un rhume.",
+    "note": "J'ai mal à + body part."
+  },
+  {
+    "cat": "Health",
+    "level": "A1",
+    "q": "Body: head, hand, arm, leg, back, stomach, eye, ear",
+    "hint": "",
+    "a": "la tête, la main, le bras, la jambe, le dos, le ventre, l'œil, l'oreille",
+    "note": "Les yeux = eyes (irregular plural)."
+  },
+  {
+    "cat": "Grammar: Possessives",
+    "level": "A1",
+    "q": "Possessive adjectives: my, your (tu), his/her",
+    "hint": "",
+    "a": "mon/ma/mes, ton/ta/tes, son/sa/ses",
+    "note": "Use mon/ton/son before feminine noun starting with vowel: mon amie."
+  },
+  {
+    "cat": "Grammar: Possessives",
+    "level": "A1",
+    "q": "Possessive adjectives: our, your (vous), their",
+    "hint": "",
+    "a": "notre/nos, votre/vos, leur/leurs",
+    "note": "Notre maison, nos enfants."
+  },
+  {
+    "cat": "Grammar: Prepositions",
+    "level": "A1",
+    "q": "'In/to' with countries and cities",
+    "hint": "",
+    "a": "en (f. countries), au (m. countries), aux (pl.), à (cities)",
+    "note": "à Paris, en France, au Maroc, aux États-Unis."
+  },
+  {
+    "cat": "Grammar: Prepositions",
+    "level": "A1",
+    "q": "Contractions: de+le, de+les, à+le, à+les",
+    "hint": "",
+    "a": "du, des, au, aux",
+    "note": "Je vais au cinéma. Le livre du professeur."
+  },
+  {
+    "cat": "Opinions",
+    "level": "A1",
+    "q": "'I like / I love / I don't like / I hate'",
+    "hint": "",
+    "a": "J'aime / J'adore / Je n'aime pas / Je déteste",
+    "note": "J'aime bien = softer 'I like'."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "A2",
+    "q": "How is the passé composé formed?",
+    "hint": "",
+    "a": "avoir/être (present) + past participle",
+    "note": "J'ai mangé. Il est allé. Elle s'est levée."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "A2",
+    "q": "Which verbs take ÊTRE in passé composé?",
+    "hint": "",
+    "a": "DR & MRS VANDERTRAMP + all reflexives",
+    "note": "aller, venir, partir, arriver, naître, mourir, rester, entrer, sortir, monter, descendre, tomber, retourner, passer (intransitive)."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "A2",
+    "q": "Past participle of: avoir, être, faire, prendre, voir, venir",
+    "hint": "",
+    "a": "eu, été, fait, pris, vu, venu",
+    "note": "Irregular past participles must be memorised."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "A2",
+    "q": "Agreement of past participle with être verbs",
+    "hint": "",
+    "a": "Agrees in gender & number with subject",
+    "note": "Elle est partie. Ils sont allés. Elles sont venues."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "A2",
+    "q": "The imparfait: when is it used?",
+    "hint": "",
+    "a": "Description, habits, ongoing past states",
+    "note": "Il faisait beau. Quand j'étais jeune…"
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "A2",
+    "q": "Imparfait formation",
+    "hint": "",
+    "a": "imperfect stem (nous present – -ons) + -ais,-ais,-ait,-ions,-iez,-aient",
+    "note": "parler → nous parlons → parl- → je parlais."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "A2",
+    "q": "Near future: aller + infinitive",
+    "hint": "",
+    "a": "je vais + infinitive",
+    "note": "Je vais partir demain. Tu vas manger quoi?"
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "A2",
+    "q": "Near past: venir de + infinitive",
+    "hint": "",
+    "a": "je viens de + infinitive",
+    "note": "Je viens de finir. Il vient de partir."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "A2",
+    "q": "Direct object pronouns",
+    "hint": "",
+    "a": "me, te, le/la, nous, vous, les",
+    "note": "Je le vois. Tu la connais? Il nous aide."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "A2",
+    "q": "Indirect object pronouns",
+    "hint": "",
+    "a": "me, te, lui, nous, vous, leur",
+    "note": "Je lui parle. Il leur écrit."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "A2",
+    "q": "Position of object pronouns",
+    "hint": "",
+    "a": "Before the conjugated verb (or infinitive)",
+    "note": "Je ne le vois pas. Il va lui parler."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "A2",
+    "q": "The pronoun Y (place/à + thing)",
+    "hint": "",
+    "a": "Y replaces à + place or à + thing",
+    "note": "J'y vais. Tu y penses? Il y a des problèmes."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "A2",
+    "q": "The pronoun EN (de + noun / quantity)",
+    "hint": "",
+    "a": "En replaces de + noun or a quantity",
+    "note": "J'en veux. Il en a trois. Je n'en ai pas."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A2",
+    "q": "What are reflexive verbs? Give 5 examples",
+    "hint": "",
+    "a": "Verbs where subject acts on itself: se lever, se laver, se coucher, s'appeler, se souvenir",
+    "note": "Je me lève à 7h. Il se lave."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A2",
+    "q": "Reflexive verb conjugation: SE LEVER",
+    "hint": "",
+    "a": "je me lève, tu te lèves, il se lève, nous nous levons, vous vous levez, ils se lèvent",
+    "note": "Note the grave accent in je/tu/il/ils forms."
+  },
+  {
+    "cat": "Grammar: Comparatives",
+    "level": "A2",
+    "q": "Comparative: more/less/as … than",
+    "hint": "",
+    "a": "plus … que / moins … que / aussi … que",
+    "note": "Il est plus grand que moi. Elle est aussi intelligente que lui."
+  },
+  {
+    "cat": "Grammar: Comparatives",
+    "level": "A2",
+    "q": "Superlative: the most / the least",
+    "hint": "",
+    "a": "le/la/les plus … / le/la/les moins …",
+    "note": "C'est le plus beau film. La moins chère."
+  },
+  {
+    "cat": "Grammar: Comparatives",
+    "level": "A2",
+    "q": "Irregular comparatives: good, bad",
+    "hint": "",
+    "a": "bon → meilleur / mauvais → pire",
+    "note": "Ce vin est meilleur. C'est le pire repas."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A2",
+    "q": "Conjugate DEVOIR (must/to have to)",
+    "hint": "",
+    "a": "je dois, tu dois, il doit, nous devons, vous devez, ils doivent",
+    "note": "Je dois partir maintenant."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "A2",
+    "q": "Conjugate SAVOIR vs CONNAÎTRE",
+    "hint": "",
+    "a": "savoir = to know facts/how; connaître = to know people/places",
+    "note": "Je sais nager. Je connais Paris."
+  },
+  {
+    "cat": "Grammar: Time Expressions",
+    "level": "A2",
+    "q": "Expressing duration: depuis, il y a, pendant",
+    "hint": "",
+    "a": "depuis = since/for (ongoing); il y a = ago; pendant = during/for (completed)",
+    "note": "J'habite ici depuis 2010. Il est parti il y a une heure. J'ai étudié pendant deux ans."
+  },
+  {
+    "cat": "Clothes",
+    "level": "A2",
+    "q": "Clothing: shirt, trousers, dress, skirt, jacket, shoes, coat",
+    "hint": "",
+    "a": "la chemise, le pantalon, la robe, la jupe, la veste, les chaussures, le manteau",
+    "note": "Je porte une robe rouge."
+  },
+  {
+    "cat": "House",
+    "level": "A2",
+    "q": "Rooms: living room, bedroom, kitchen, bathroom, garden",
+    "hint": "",
+    "a": "le salon, la chambre, la cuisine, la salle de bains, le jardin",
+    "note": "J'habite dans un appartement avec deux chambres."
+  },
+  {
+    "cat": "House",
+    "level": "A2",
+    "q": "Furniture: table, chair, bed, sofa, wardrobe, lamp",
+    "hint": "",
+    "a": "la table, la chaise, le lit, le canapé, l'armoire, la lampe",
+    "note": ""
+  },
+  {
+    "cat": "Jobs",
+    "level": "A2",
+    "q": "Jobs: doctor, teacher, engineer, nurse, cook, lawyer, farmer",
+    "hint": "",
+    "a": "médecin, professeur, ingénieur, infirmier/ière, cuisinier/ière, avocat(e), agriculteur/trice",
+    "note": "Je suis médecin. No article with être + profession."
+  },
+  {
+    "cat": "Daily Routine",
+    "level": "A2",
+    "q": "Daily routine verbs",
+    "hint": "",
+    "a": "se lever, se doucher, s'habiller, prendre le petit-déjeuner, aller au travail, se coucher",
+    "note": "Je me lève à 6h30 et je me couche à 23h."
+  },
+  {
+    "cat": "Leisure",
+    "level": "A2",
+    "q": "Hobbies: sport, music, reading, cinema, travel, cooking",
+    "hint": "",
+    "a": "le sport, la musique, la lecture, le cinéma, le voyage, la cuisine",
+    "note": "J'aime faire du sport et lire."
+  },
+  {
+    "cat": "School",
+    "level": "A2",
+    "q": "School subjects: maths, French, history, science, art, sport",
+    "hint": "",
+    "a": "les maths, le français, l'histoire, les sciences, l'art, le sport/l'EPS",
+    "note": "Ma matière préférée est l'histoire."
+  },
+  {
+    "cat": "Nature",
+    "level": "A2",
+    "q": "Nature: sea, mountain, river, forest, field, sky, sun, moon",
+    "hint": "",
+    "a": "la mer, la montagne, la rivière/le fleuve, la forêt, le champ, le ciel, le soleil, la lune",
+    "note": ""
+  },
+  {
+    "cat": "Animals",
+    "level": "A2",
+    "q": "Animals: dog, cat, horse, bird, fish, rabbit, cow, chicken",
+    "hint": "",
+    "a": "le chien, le chat, le cheval, l'oiseau, le poisson, le lapin, la vache, le poulet",
+    "note": ""
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "B1",
+    "q": "Futur simple formation",
+    "hint": "",
+    "a": "infinitive + -ai,-as,-a,-ons,-ez,-ont (drop -e from -re verbs)",
+    "note": "Je parlerai, tu finiras, il vendra. Irregular: aller→ir-, avoir→aur-, être→ser-, faire→fer-."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "B1",
+    "q": "Irregular futur stems",
+    "hint": "",
+    "a": "être→ser-, avoir→aur-, aller→ir-, faire→fer-, venir→viendr-, vouloir→voudr-, pouvoir→pourr-, savoir→saur-",
+    "note": "Je serai là. Il aura le temps."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "B1",
+    "q": "Conditionnel présent formation",
+    "hint": "",
+    "a": "futur stem + imparfait endings (-ais,-ais,-ait,-ions,-iez,-aient)",
+    "note": "Je voudrais, il faudrait, nous serions."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "B1",
+    "q": "Uses of the conditionnel présent",
+    "hint": "",
+    "a": "Politeness, hypothetical (si + imparfait…conditionnel), reported speech",
+    "note": "Si j'avais de l'argent, je voyagerais."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "B1",
+    "q": "The SUBJONCTIF présent: when is it used?",
+    "hint": "",
+    "a": "After expressions of wish, emotion, doubt, necessity; after que (certain conjunctions)",
+    "note": "Il faut que tu viennes. Je veux qu'il parte."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "B1",
+    "q": "Subjonctif présent formation",
+    "hint": "",
+    "a": "ils-form present stem + -e,-es,-e,-ions,-iez,-ent",
+    "note": "parler: qu'il parle, que nous parlions."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "B1",
+    "q": "Irregular subjunctives: être, avoir, aller, faire",
+    "hint": "",
+    "a": "être: soit/sois/soient; avoir: ait/aies/aient; aller: aille/allions; faire: fasse/fassions",
+    "note": "Que je sois, que tu aies, qu'il aille."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "B1",
+    "q": "Plus-que-parfait (pluperfect) formation & use",
+    "hint": "",
+    "a": "avoir/être imparfait + past participle",
+    "note": "J'avais mangé avant qu'il arrive. = I had eaten before he arrived."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "B1",
+    "q": "Futur antérieur: formation & use",
+    "hint": "",
+    "a": "avoir/être futur + past participle",
+    "note": "Quand il sera arrivé, nous partirons. = When he has arrived, we will leave."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "B1",
+    "q": "Relative pronouns: qui, que, dont, où",
+    "hint": "",
+    "a": "qui = subject; que = object; dont = of which/whose; où = where/when",
+    "note": "L'homme qui parle. Le livre que je lis. Le film dont tu parles. La ville où je vis."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "B1",
+    "q": "Relative pronoun LEQUEL (which/whom)",
+    "hint": "",
+    "a": "lequel/laquelle/lesquels/lesquelles after a preposition",
+    "note": "La raison pour laquelle je suis venu."
+  },
+  {
+    "cat": "Grammar: Passive",
+    "level": "B1",
+    "q": "How to form the passive voice",
+    "hint": "",
+    "a": "être (conjugated) + past participle (agrees with subject)",
+    "note": "Ce livre est écrit par Flaubert. La ville a été détruite."
+  },
+  {
+    "cat": "Grammar: Verbs",
+    "level": "B1",
+    "q": "Causative faire (faire + infinitive)",
+    "hint": "",
+    "a": "faire + infinitive = to have/get something done",
+    "note": "Je fais réparer ma voiture. Elle fait construire une maison."
+  },
+  {
+    "cat": "Grammar: Conditionals",
+    "level": "B1",
+    "q": "Si clause type 1: real possibility",
+    "hint": "",
+    "a": "Si + présent … futur/impératif",
+    "note": "Si tu viens, je serai content."
+  },
+  {
+    "cat": "Grammar: Conditionals",
+    "level": "B1",
+    "q": "Si clause type 2: hypothetical",
+    "hint": "",
+    "a": "Si + imparfait … conditionnel présent",
+    "note": "Si j'avais le temps, j'apprendrais le piano."
+  },
+  {
+    "cat": "Grammar: Conditionals",
+    "level": "B1",
+    "q": "Si clause type 3: impossible/regret",
+    "hint": "",
+    "a": "Si + plus-que-parfait … conditionnel passé",
+    "note": "Si j'avais su, je serais venu."
+  },
+  {
+    "cat": "Connectives",
+    "level": "B1",
+    "q": "Cause & consequence connectors",
+    "hint": "",
+    "a": "parce que, car, puisque, donc, c'est pourquoi, ainsi",
+    "note": "Il est fatigué parce qu'il a travaillé. C'est pourquoi il dort."
+  },
+  {
+    "cat": "Connectives",
+    "level": "B1",
+    "q": "Contrast connectors",
+    "hint": "",
+    "a": "mais, cependant, pourtant, néanmoins, or, alors que, tandis que",
+    "note": "Il fait froid, pourtant il ne porte pas de manteau."
+  },
+  {
+    "cat": "Connectives",
+    "level": "B1",
+    "q": "Addition connectors",
+    "hint": "",
+    "a": "de plus, en outre, par ailleurs, également, aussi",
+    "note": "De plus, il faut considérer l'économie."
+  },
+  {
+    "cat": "Connectives",
+    "level": "B1",
+    "q": "Time connectors",
+    "hint": "",
+    "a": "d'abord, ensuite, puis, enfin, finalement, avant de, après avoir/être",
+    "note": "D'abord il s'est levé, ensuite il a mangé."
+  },
+  {
+    "cat": "Vocabulary: B1",
+    "level": "B1",
+    "q": "Emotions: happy, sad, angry, surprised, afraid, bored, proud",
+    "hint": "",
+    "a": "heureux/heureuse, triste, en colère, surpris(e), apeuré(e)/avoir peur, s'ennuyer, fier/fière",
+    "note": "Je suis fier de toi. Elle a peur des araignées."
+  },
+  {
+    "cat": "Vocabulary: B1",
+    "level": "B1",
+    "q": "Society: government, election, law, rights, citizens, democracy",
+    "hint": "",
+    "a": "le gouvernement, l'élection, la loi, les droits, les citoyens, la démocratie",
+    "note": "Des sujets B1 essentiels."
+  },
+  {
+    "cat": "Vocabulary: B1",
+    "level": "B1",
+    "q": "Environment: pollution, climate change, energy, recycling, nature",
+    "hint": "",
+    "a": "la pollution, le changement climatique, l'énergie, le recyclage, la nature",
+    "note": "Le réchauffement climatique est un défi majeur."
+  },
+  {
+    "cat": "Vocabulary: B1",
+    "level": "B1",
+    "q": "Technology: computer, internet, mobile phone, social media, email",
+    "hint": "",
+    "a": "l'ordinateur, internet, le téléphone portable, les réseaux sociaux, l'e-mail/le courriel",
+    "note": "Je vérifie mes e-mails chaque matin."
+  },
+  {
+    "cat": "Vocabulary: B1",
+    "level": "B1",
+    "q": "Health: surgery, prescription, symptom, vaccine, exercise, diet",
+    "hint": "",
+    "a": "la chirurgie, l'ordonnance, le symptôme, le vaccin, l'exercice, le régime",
+    "note": "Il faut suivre un régime équilibré."
+  },
+  {
+    "cat": "Vocabulary: B1",
+    "level": "B1",
+    "q": "Travel & tourism: hotel, reservation, itinerary, passport, customs, luggage",
+    "hint": "",
+    "a": "l'hôtel, la réservation, l'itinéraire, le passeport, la douane, les bagages",
+    "note": "J'ai perdu mes bagages à l'aéroport."
+  },
+  {
+    "cat": "Vocabulary: B1",
+    "level": "B1",
+    "q": "Work: salary, contract, colleague, meeting, promotion, unemployment",
+    "hint": "",
+    "a": "le salaire, le contrat, le/la collègue, la réunion, la promotion, le chômage",
+    "note": "Il a obtenu une promotion."
+  },
+  {
+    "cat": "Vocabulary: B1",
+    "level": "B1",
+    "q": "Education: university, degree, scholarship, exam, grade, lecture",
+    "hint": "",
+    "a": "l'université, le diplôme, la bourse, l'examen, la note, le cours magistral",
+    "note": "J'ai obtenu mon diplôme l'année dernière."
+  },
+  {
+    "cat": "Grammar: Subjonctif",
+    "level": "B2",
+    "q": "Subjonctif passé: formation & use",
+    "hint": "",
+    "a": "avoir/être subjonctif présent + past participle",
+    "note": "Bien qu'il soit parti… Je regrette qu'elle soit venue."
+  },
+  {
+    "cat": "Grammar: Subjonctif",
+    "level": "B2",
+    "q": "Conjunctions requiring the subjonctif",
+    "hint": "",
+    "a": "bien que, quoique, pour que, afin que, avant que, à moins que, pourvu que, sans que",
+    "note": "Bien qu'il soit fatigué, il continue."
+  },
+  {
+    "cat": "Grammar: Subjonctif",
+    "level": "B2",
+    "q": "Avoiding subjonctif with same subject",
+    "hint": "",
+    "a": "Use infinitive instead of subjonctif when subjects are identical",
+    "note": "Je veux partir (not *je veux que je parte*). Je veux qu'il parte (different subject → subjonctif)."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "B2",
+    "q": "Conditionnel passé: formation & use",
+    "hint": "",
+    "a": "avoir/être conditionnel + past participle",
+    "note": "J'aurais dû partir. Il serait venu si… (type 3 si clause)"
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "B2",
+    "q": "Subjonctif imparfait – recognition",
+    "hint": "",
+    "a": "Literary tense; 3rd person: il parlât, il fût, il eût",
+    "note": "Used in formal writing; recognise in literature."
+  },
+  {
+    "cat": "Grammar: Tenses",
+    "level": "B2",
+    "q": "Passé simple – common forms to recognise",
+    "hint": "",
+    "a": "parler: parla; être: fut; avoir: eut; faire: fit; venir: vint; voir: vit",
+    "note": "Literary/historical narrative tense. Recognise don't produce (usually)."
+  },
+  {
+    "cat": "Grammar: Passive",
+    "level": "B2",
+    "q": "Agent in passive: expressed with par or de",
+    "hint": "",
+    "a": "par = active agent; de = state/emotion/habitual",
+    "note": "Il est aimé de tous. La ville a été détruite par les bombes."
+  },
+  {
+    "cat": "Grammar: Passive",
+    "level": "B2",
+    "q": "Pronominal passive (reflexive as passive)",
+    "hint": "",
+    "a": "se + verb = 'it is done'",
+    "note": "Le français se parle ici. Ça se fait."
+  },
+  {
+    "cat": "Grammar: Discourse",
+    "level": "B2",
+    "q": "Indirect speech: tense changes",
+    "hint": "",
+    "a": "présent→imparfait; passé composé→plus-que-parfait; futur→conditionnel",
+    "note": "Il a dit qu'il était fatigué. Elle a annoncé qu'elle viendrait."
+  },
+  {
+    "cat": "Grammar: Discourse",
+    "level": "B2",
+    "q": "Reported questions: how to form",
+    "hint": "",
+    "a": "si (yes/no), ce que/ce qui (what), question word (other)",
+    "note": "Il m'a demandé si je voulais manger. Elle a demandé ce que je faisais."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "B2",
+    "q": "Double object pronouns – order",
+    "hint": "",
+    "a": "me/te/nous/vous BEFORE le/la/les BEFORE lui/leur; y and en last",
+    "note": "Il me le donne. Ne le lui dis pas. Il y en a."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "B2",
+    "q": "Demonstrative pronouns: celui, celle, ceux, celles",
+    "hint": "",
+    "a": "celui-ci/là, celle-ci/là, ceux-ci/là, celles-ci/là",
+    "note": "Je préfère celui-ci. Ceux qui étudient réussissent."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "B2",
+    "q": "Indefinite pronouns: quelqu'un, quelque chose, personne, rien, chacun, tout",
+    "hint": "",
+    "a": "quelqu'un, quelque chose, ne…personne, ne…rien, chacun, tout",
+    "note": "Il n'y a personne. Je n'ai rien compris."
+  },
+  {
+    "cat": "Grammar: Emphasis",
+    "level": "B2",
+    "q": "C'est … qui/que for emphasis",
+    "hint": "",
+    "a": "C'est lui qui a parlé. C'est toi que j'aime.",
+    "note": "Strong emphasis on a specific element."
+  },
+  {
+    "cat": "Grammar: Emphasis",
+    "level": "B2",
+    "q": "Inversion in formal/literary writing",
+    "hint": "",
+    "a": "Said/asked + inversion: dit-il, répondit-elle",
+    "note": "'Bonjour', dit-il. Used after dialogue & in formal questions."
+  },
+  {
+    "cat": "Grammar: Gerund",
+    "level": "B2",
+    "q": "Le gérondif (gerund): formation & use",
+    "hint": "",
+    "a": "en + present participle (-ant form)",
+    "note": "En travaillant dur, il réussira. Simultaneous actions or condition."
+  },
+  {
+    "cat": "Vocabulary: B2",
+    "level": "B2",
+    "q": "Abstract nouns: justice, freedom, equality, power, truth, consciousness",
+    "hint": "",
+    "a": "la justice, la liberté, l'égalité, le pouvoir, la vérité, la conscience",
+    "note": "Fondamental pour le discours intellectuel."
+  },
+  {
+    "cat": "Vocabulary: B2",
+    "level": "B2",
+    "q": "Academic/intellectual: concept, theory, hypothesis, analysis, synthesis",
+    "hint": "",
+    "a": "le concept, la théorie, l'hypothèse, l'analyse, la synthèse",
+    "note": "La synthèse est une compétence essentielle."
+  },
+  {
+    "cat": "Vocabulary: B2",
+    "level": "B2",
+    "q": "Economics: market, trade, tax, budget, investment, growth, recession",
+    "hint": "",
+    "a": "le marché, le commerce, l'impôt/la taxe, le budget, l'investissement, la croissance, la récession",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: B2",
+    "level": "B2",
+    "q": "Politics: parliament, minister, reform, debate, policy, vote, opposition",
+    "hint": "",
+    "a": "le parlement, le ministre, la réforme, le débat, la politique, le vote, l'opposition",
+    "note": "La réforme a provoqué un grand débat."
+  },
+  {
+    "cat": "Vocabulary: B2",
+    "level": "B2",
+    "q": "Feelings (nuanced): anxious, relieved, overwhelmed, nostalgic, frustrated, melancholy",
+    "hint": "",
+    "a": "anxieux/se, soulagé(e), submergé(e)/débordé(e), nostalgique, frustré(e), mélancolique",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: B2",
+    "level": "B2",
+    "q": "Literary terms: narrative, metaphor, symbol, irony, theme, style, tone",
+    "hint": "",
+    "a": "le récit, la métaphore, le symbole, l'ironie, le thème, le style, le ton",
+    "note": "Indispensable pour l'analyse littéraire."
+  },
+  {
+    "cat": "Vocabulary: B2",
+    "level": "B2",
+    "q": "Medicine: diagnosis, treatment, dosage, chronic, acute, prognosis",
+    "hint": "",
+    "a": "le diagnostic, le traitement, la dose, chronique, aigu(ë), le pronostic",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: B2",
+    "level": "B2",
+    "q": "Science: experiment, result, data, evidence, phenomenon, hypothesis",
+    "hint": "",
+    "a": "l'expérience, le résultat, les données, la preuve, le phénomène, l'hypothèse",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: B2",
+    "level": "B2",
+    "q": "Law: contract, liability, penalty, trial, verdict, appeal, plaintiff, defendant",
+    "hint": "",
+    "a": "le contrat, la responsabilité, la peine, le procès, le verdict, l'appel, le plaignant, le défendeur",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: B2",
+    "level": "B2",
+    "q": "Media: headline, editorial, broadcast, censorship, propaganda, source",
+    "hint": "",
+    "a": "le titre, l'éditorial, la diffusion, la censure, la propagande, la source",
+    "note": ""
+  },
+  {
+    "cat": "Grammar: Subjunctive",
+    "level": "C1",
+    "q": "Subjonctif with superlatives and restrictive expressions",
+    "hint": "",
+    "a": "le seul, le premier, le dernier, le plus…que + subjonctif",
+    "note": "C'est le meilleur film que j'aie vu. Le seul qui soit venu."
+  },
+  {
+    "cat": "Grammar: Subjunctive",
+    "level": "C1",
+    "q": "Subjonctif vs indicatif after verbs of saying/thinking (positive vs negative)",
+    "hint": "",
+    "a": "Positive opinion → indicatif; negative/doubt → subjonctif",
+    "note": "Je pense qu'il vient (indicatif). Je ne pense pas qu'il vienne (subjonctif)."
+  },
+  {
+    "cat": "Grammar: Subjunctive",
+    "level": "C1",
+    "q": "Subjonctif imparfait in formal writing",
+    "hint": "",
+    "a": "parlât, fût, eût, vînt, pût, voulût",
+    "note": "Rarely produced; must recognise in literary texts."
+  },
+  {
+    "cat": "Grammar: Subjunctive",
+    "level": "C1",
+    "q": "Subjonctif plus-que-parfait",
+    "hint": "",
+    "a": "eût/fût + past participle",
+    "note": "S'il l'eût su… (literary/formal hypothetical)"
+  },
+  {
+    "cat": "Grammar: Style",
+    "level": "C1",
+    "q": "Nominalization – turning verbs/adjectives into nouns",
+    "hint": "",
+    "a": "parler → la parole / la discussion; libre → la liberté; arriver → l'arrivée",
+    "note": "Used heavily in formal French: La mise en œuvre de cette politique…"
+  },
+  {
+    "cat": "Grammar: Style",
+    "level": "C1",
+    "q": "Apposition and participial phrases",
+    "hint": "",
+    "a": "Using past/present participles as reduced relative clauses",
+    "note": "Ayant terminé son travail, il est parti. (= Après avoir terminé…)"
+  },
+  {
+    "cat": "Grammar: Style",
+    "level": "C1",
+    "q": "Absolute constructions",
+    "hint": "",
+    "a": "Les devoirs faits, il sortit.",
+    "note": "Literary; sets scene or condition without a conjunction."
+  },
+  {
+    "cat": "Grammar: Register",
+    "level": "C1",
+    "q": "Differences between formal and informal French",
+    "hint": "",
+    "a": "Written/formal: inversion, ne…pas retained, pas de elision; Spoken/informal: on for nous, dropping ne, elision",
+    "note": "C'est-il vrai? (arch) vs C'est vrai, non?"
+  },
+  {
+    "cat": "Grammar: Register",
+    "level": "C1",
+    "q": "Verlan and informal spoken French",
+    "hint": "",
+    "a": "Verlan = syllable reversal slang: l'envers → verlan, meuf (femme), truc (thing), genre (like)",
+    "note": "Recognition essential for authentic comprehension."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "C1",
+    "q": "Pronoun CE vs IL as subject of être",
+    "hint": "",
+    "a": "Ce (c') + être + noun/adj; il/elle for people with titles",
+    "note": "C'est un médecin. Il est médecin (no article). C'est beau."
+  },
+  {
+    "cat": "Grammar: Pronouns",
+    "level": "C1",
+    "q": "Ne explétif (expletive ne)",
+    "hint": "",
+    "a": "Non-negative ne after: avant que, à moins que, de peur que, craindre que",
+    "note": "Je crains qu'il ne parte. (ne has no negative meaning here)"
+  },
+  {
+    "cat": "Grammar: Connectives",
+    "level": "C1",
+    "q": "Concession & restriction: or, certes, il est vrai que, quand bien même",
+    "hint": "",
+    "a": "or = now/but (argumentative); certes = admittedly; quand bien même + conditionnel = even if",
+    "note": "Certes, ce n'est pas parfait, mais… Quand bien même il viendrait…"
+  },
+  {
+    "cat": "Grammar: Connectives",
+    "level": "C1",
+    "q": "Reformulation & illustration: autrement dit, c'est-à-dire, à savoir, par exemple, notamment",
+    "hint": "",
+    "a": "autrement dit = in other words; à savoir = namely; notamment = in particular",
+    "note": "La situation est grave, à savoir que les chiffres sont alarmants."
+  },
+  {
+    "cat": "Vocabulary: C1",
+    "level": "C1",
+    "q": "Nuanced opinion: it seems, apparently, presumably, supposedly",
+    "hint": "",
+    "a": "il semble que (+subj.), apparemment, vraisemblablement, soi-disant, à priori",
+    "note": "Il semble qu'il ait menti. Soi-disant expert…"
+  },
+  {
+    "cat": "Vocabulary: C1",
+    "level": "C1",
+    "q": "Rhetorical/argumentative: on pourrait arguer, force est de constater, il convient de",
+    "hint": "",
+    "a": "One could argue, one must note, it is fitting to",
+    "note": "Force est de constater que la situation s'est aggravée."
+  },
+  {
+    "cat": "Vocabulary: C1",
+    "level": "C1",
+    "q": "Sophisticated emotion: anguish, elation, awe, contempt, schadenfreude equivalent",
+    "hint": "",
+    "a": "l'angoisse, l'exaltation, la stupeur/l'émerveillement, le mépris, la joie maligne",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: C1",
+    "level": "C1",
+    "q": "Philosophy terms: être, existence, essence, contingent, absurde, dialectique",
+    "hint": "",
+    "a": "being, existence, essence, contingent, absurd, dialectic",
+    "note": "Sartre: 'l'existence précède l'essence'"
+  },
+  {
+    "cat": "Vocabulary: C1",
+    "level": "C1",
+    "q": "Formal discourse: en revanche, à l'inverse, quant à, eu égard à, dans la mesure où",
+    "hint": "",
+    "a": "on the other hand, conversely, as for, with regard to, insofar as",
+    "note": "Quant à la question économique, il faut nuancer."
+  },
+  {
+    "cat": "Vocabulary: C1",
+    "level": "C1",
+    "q": "Financial/business: merger, shareholder, yield, deficit, surplus, liquidity, leverage",
+    "hint": "",
+    "a": "fusion, actionnaire, rendement, déficit, excédent, liquidité, effet de levier",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: C1",
+    "level": "C1",
+    "q": "Psychology: unconscious, cognitive bias, trauma, resilience, attachment",
+    "hint": "",
+    "a": "l'inconscient, biais cognitif, le traumatisme, la résilience, l'attachement",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: C1",
+    "level": "C1",
+    "q": "Idioms: avoir le cafard, casser les pieds, poser un lapin, avoir du pain sur la planche",
+    "hint": "",
+    "a": "to feel down, to be annoying, to stand someone up, to have a lot on one's plate",
+    "note": "J'ai du pain sur la planche ce semaine."
+  },
+  {
+    "cat": "French Culture",
+    "level": "C1",
+    "q": "Major French philosophers and their key ideas",
+    "hint": "",
+    "a": "Descartes (cogito), Voltaire (enlightenment), Rousseau (social contract), Sartre (existentialism), Simone de Beauvoir (feminism), Camus (absurdism)",
+    "note": "'Je pense, donc je suis.'"
+  },
+  {
+    "cat": "French Culture",
+    "level": "C1",
+    "q": "Key French literary works",
+    "hint": "",
+    "a": "Les Misérables (Hugo), Madame Bovary (Flaubert), À la recherche du temps perdu (Proust), L'Étranger (Camus), La Nausée (Sartre)",
+    "note": "Proust's novel is one of the longest ever written."
+  },
+  {
+    "cat": "French Culture",
+    "level": "C1",
+    "q": "French Republic: key values and symbols",
+    "hint": "",
+    "a": "Liberté, Égalité, Fraternité. La Marseillaise. Marianne. Le coq gaulois. 14 juillet = Bastille Day.",
+    "note": "La devise de la République française."
+  },
+  {
+    "cat": "French Culture",
+    "level": "C1",
+    "q": "French film: la Nouvelle Vague",
+    "hint": "",
+    "a": "1950s–60s movement: Godard (À bout de souffle), Truffaut (Les 400 coups), Varda, Rohmer",
+    "note": "Caractérisé par des tournages en extérieur et un style improvisé."
+  },
+  {
+    "cat": "French Culture",
+    "level": "C1",
+    "q": "Francophone world: major French-speaking countries",
+    "hint": "",
+    "a": "France, Belgique, Suisse, Canada (Québec), Sénégal, Côte d'Ivoire, Maroc, Algérie, Tunisie, RDC",
+    "note": "~300 million francophones worldwide."
+  },
+  {
+    "cat": "Grammar: Advanced",
+    "level": "C2",
+    "q": "The passé simple vs passé composé distinction",
+    "hint": "",
+    "a": "Passé simple = literary/formal narrative (completed action); passé composé = spoken/recent",
+    "note": "Il mourut en 1789 (literary). Il est mort hier (spoken)."
+  },
+  {
+    "cat": "Grammar: Advanced",
+    "level": "C2",
+    "q": "Sequence of tenses in subjonctif (literary)",
+    "hint": "",
+    "a": "Présent → subjonctif présent; Passé → subjonctif imparfait (literary)",
+    "note": "Il voulait qu'elle partît. (literary)"
+  },
+  {
+    "cat": "Grammar: Advanced",
+    "level": "C2",
+    "q": "Double negatives and compound negation",
+    "hint": "",
+    "a": "ne…plus jamais, ne…ni…ni, ne…guère, ne…point (archaic), ne…que (restriction)",
+    "note": "Je ne mange ni viande ni poisson. Il ne parle guère."
+  },
+  {
+    "cat": "Grammar: Advanced",
+    "level": "C2",
+    "q": "Inversion in questions and literary style",
+    "hint": "",
+    "a": "Subject-verb inversion; complex inversion with noun subject",
+    "note": "Où cet homme va-t-il ? Que dit l'auteur ?"
+  },
+  {
+    "cat": "Grammar: Advanced",
+    "level": "C2",
+    "q": "Pronominal verbs: reflexive, reciprocal, idiomatic, passive",
+    "hint": "",
+    "a": "se laver (refl.); se voir (recip.); s'en aller (idiom.); ça se dit (passive)",
+    "note": "Ils se sont vus hier. Je m'en vais."
+  },
+  {
+    "cat": "Grammar: Advanced",
+    "level": "C2",
+    "q": "Infinitive as subject/noun",
+    "hint": "",
+    "a": "L'infinitif peut être sujet: Partir, c'est mourir un peu.",
+    "note": "Vivre à Paris est un rêve. = Living in Paris is a dream."
+  },
+  {
+    "cat": "Grammar: Advanced",
+    "level": "C2",
+    "q": "Free indirect speech (style indirect libre)",
+    "hint": "",
+    "a": "Narrative technique blending narrator and character voice without 'he said that'",
+    "note": "Elle rentra chez elle. Tout était perdu. Que faire maintenant ? (= character's thoughts)."
+  },
+  {
+    "cat": "Grammar: Advanced",
+    "level": "C2",
+    "q": "Register continuum: argotique → familier → courant → soutenu → littéraire",
+    "hint": "",
+    "a": "voiture → bagnole (slang) / caisse (fam.) / voiture (current) / automobile (formal) / char (literary/archaic)",
+    "note": "Mastery requires commanding all registers."
+  },
+  {
+    "cat": "Grammar: Advanced",
+    "level": "C2",
+    "q": "Archaisms and literary constructions to recognise",
+    "hint": "",
+    "a": "Que ne…(= why not); il n'est pire…que; Puisse-t-il…! (may he…); Daignez… (deign to)",
+    "note": "Que ne l'avez-vous dit plus tôt! = Why didn't you say so sooner!"
+  },
+  {
+    "cat": "Grammar: Advanced",
+    "level": "C2",
+    "q": "Nominalisation in formal writing",
+    "hint": "",
+    "a": "Converting verbs to noun phrases for dense formal prose",
+    "note": "procéder à une analyse = analyser; effectuer une réduction = réduire; avoir recours à = utiliser"
+  },
+  {
+    "cat": "Vocabulary: C2",
+    "level": "C2",
+    "q": "Rare/literary synonyms for 'to say/tell'",
+    "hint": "",
+    "a": "affirmer, soutenir, prétendre, alléguer, énoncer, déclarer, clamer, professer, articuler",
+    "note": "Il a prétendu n'être au courant de rien."
+  },
+  {
+    "cat": "Vocabulary: C2",
+    "level": "C2",
+    "q": "Nuanced verbs for movement/change",
+    "hint": "",
+    "a": "se métamorphoser, s'épanouir, décliner, péricliter, fluctuer, osciller, stagner",
+    "note": "L'économie oscille entre croissance et récession."
+  },
+  {
+    "cat": "Vocabulary: C2",
+    "level": "C2",
+    "q": "Advanced connectives: partant, dès lors, pour autant, tant s'en faut, il s'ensuit que",
+    "hint": "",
+    "a": "therefore/hence, from then on, yet, far from it, it follows that",
+    "note": "Il n'est pas parti; partant, il faut lui parler."
+  },
+  {
+    "cat": "Vocabulary: C2",
+    "level": "C2",
+    "q": "Learned vocabulary: épistémologie, herméneutique, paradigme, ontologie, phénoménologie",
+    "hint": "",
+    "a": "epistemology, hermeneutics, paradigm, ontology, phenomenology",
+    "note": "Used in academic French across disciplines."
+  },
+  {
+    "cat": "Vocabulary: C2",
+    "level": "C2",
+    "q": "Proverbs & fixed expressions: L'habit ne fait pas le moine / Qui vivra verra / Mieux vaut prévenir que guérir",
+    "hint": "",
+    "a": "Clothes don't make the man / Time will tell / Prevention is better than cure",
+    "note": "Ces expressions enrichissent le discours."
+  },
+  {
+    "cat": "Vocabulary: C2",
+    "level": "C2",
+    "q": "False friends (faux amis): actuel, sensible, large, prétendre, assister",
+    "hint": "",
+    "a": "actuel = current (not actual); sensible = sensitive; large = wide; prétendre = to claim; assister à = to attend",
+    "note": "Je suis sensible à ta remarque = I'm sensitive to your remark."
+  },
+  {
+    "cat": "Vocabulary: C2",
+    "level": "C2",
+    "q": "Verbs with different meanings with avoir vs être",
+    "hint": "",
+    "a": "monter, descendre, sortir, passer, retourner — transitive (avoir) vs intransitive (être)",
+    "note": "J'ai monté les valises (I brought up). Je suis monté (I went up)."
+  },
+  {
+    "cat": "Vocabulary: C2",
+    "level": "C2",
+    "q": "Advanced idiomatic expressions",
+    "hint": "",
+    "a": "ne pas être dans son assiette, prendre le taureau par les cornes, tourner autour du pot, mettre les pieds dans le plat",
+    "note": "Arrête de tourner autour du pot et dis la vérité!"
+  },
+  {
+    "cat": "Vocabulary: C2",
+    "level": "C2",
+    "q": "Euphemisms and politically sensitive language",
+    "hint": "",
+    "a": "sans-domicile-fixe (SDF), personne à mobilité réduite, non-voyant, en situation irrégulière",
+    "note": "Register sensitivity is a C2 marker."
+  },
+  {
+    "cat": "Vocabulary: C2",
+    "level": "C2",
+    "q": "Collocations with FAIRE",
+    "hint": "",
+    "a": "faire face à, faire preuve de, faire part de, faire état de, faire fi de",
+    "note": "Il a fait preuve de courage. Nous faisons fi des critiques."
+  },
+  {
+    "cat": "Vocabulary: C2",
+    "level": "C2",
+    "q": "Collocations with METTRE",
+    "hint": "",
+    "a": "mettre en œuvre, mettre en cause, mettre en relief, mettre en avant, mettre à profit",
+    "note": "La direction a mis en œuvre un nouveau plan."
+  },
+  {
+    "cat": "Vocabulary: C2",
+    "level": "C2",
+    "q": "Collocations with PORTER",
+    "hint": "",
+    "a": "porter atteinte à, porter un jugement sur, porter ses fruits, porter à croire, se porter garant",
+    "note": "Cette décision porte atteinte à nos libertés."
+  },
+  {
+    "cat": "French Culture",
+    "level": "C2",
+    "q": "The Académie française & language policy",
+    "hint": "",
+    "a": "Founded 1635; protects French; publishes official dictionary; debates loanwords (weekend → fin de semaine; email → courriel)",
+    "note": "L'Académie a 40 membres appelés 'les Immortels'."
+  },
+  {
+    "cat": "French Culture",
+    "level": "C2",
+    "q": "Key French historical periods",
+    "hint": "",
+    "a": "Révolution (1789), Premier Empire (Napoléon), Troisième République, Occupation/Résistance (1940-44), Cinquième République (1958–)",
+    "note": "De Gaulle fonda la Cinquième République."
+  },
+  {
+    "cat": "French Culture",
+    "level": "C2",
+    "q": "French art movements",
+    "hint": "",
+    "a": "Impressionnisme (Monet, Renoir), Cubisme (Picasso/Braque), Surréalisme (Dalí, Magritte), Existentialisme artistique",
+    "note": "L'impressionnisme naquit en opposition à l'art académique."
+  },
+  {
+    "cat": "French Culture",
+    "level": "C2",
+    "q": "Concepts unique to French culture",
+    "hint": "",
+    "a": "Laïcité (strict secularism), la francophonie, l'exception culturelle, le terroir, savoir-vivre",
+    "note": "La laïcité est un principe constitutionnel."
+  },
+  {
+    "cat": "French Culture",
+    "level": "C2",
+    "q": "French linguistic concepts",
+    "hint": "",
+    "a": "La liaison, l'élision, l'enchaînement, le e caduc, les registres de langue",
+    "note": "Les liaisons obligatoires: les_enfants, vous_avez, nous_allons."
+  },
+  {
+    "cat": "French Culture",
+    "level": "C2",
+    "q": "Major French intellectuals of the 20th century",
+    "hint": "",
+    "a": "Sartre, Beauvoir, Camus, Lévi-Strauss, Foucault, Derrida, Bourdieu, Barthes",
+    "note": "Foucault a transformé notre façon de penser le pouvoir."
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: la nuque",
+    "hint": "",
+    "a": "nape of the neck",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: le poignet",
+    "hint": "",
+    "a": "wrist",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: la cheville",
+    "hint": "",
+    "a": "ankle",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: le genou",
+    "hint": "",
+    "a": "knee",
+    "note": "Les genoux (plural)"
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: le coude",
+    "hint": "",
+    "a": "elbow",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: l'épaule (f.)",
+    "hint": "",
+    "a": "shoulder",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: les poumons",
+    "hint": "",
+    "a": "lungs",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: le cœur",
+    "hint": "",
+    "a": "heart",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: le foie",
+    "hint": "",
+    "a": "liver",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: les reins",
+    "hint": "",
+    "a": "kidneys",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: le cerveau",
+    "hint": "",
+    "a": "brain",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: la gorge",
+    "hint": "",
+    "a": "throat",
+    "note": "J'ai mal à la gorge = I have a sore throat"
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: le pouce",
+    "hint": "",
+    "a": "thumb",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: l'ongle (m.)",
+    "hint": "",
+    "a": "nail (finger/toe)",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: le talon",
+    "hint": "",
+    "a": "heel",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: la paupière",
+    "hint": "",
+    "a": "eyelid",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: le sourcil",
+    "hint": "",
+    "a": "eyebrow",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: la pommette",
+    "hint": "",
+    "a": "cheekbone",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: la mâchoire",
+    "hint": "",
+    "a": "jaw",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Body",
+    "level": "B1",
+    "q": "Translate: le menton",
+    "hint": "",
+    "a": "chin",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: l'agneau (m.)",
+    "hint": "",
+    "a": "lamb",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le porc",
+    "hint": "",
+    "a": "pork",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le bœuf",
+    "hint": "",
+    "a": "beef",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la crevette",
+    "hint": "",
+    "a": "shrimp / prawn",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le homard",
+    "hint": "",
+    "a": "lobster",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la moule",
+    "hint": "",
+    "a": "mussel",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le saumon",
+    "hint": "",
+    "a": "salmon",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la truite",
+    "hint": "",
+    "a": "trout",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: l'œuf (m.)",
+    "hint": "",
+    "a": "egg",
+    "note": "les œufs"
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la farine",
+    "hint": "",
+    "a": "flour",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le sucre",
+    "hint": "",
+    "a": "sugar",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le sel",
+    "hint": "",
+    "a": "salt",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le poivre",
+    "hint": "",
+    "a": "pepper",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la moutarde",
+    "hint": "",
+    "a": "mustard",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le vinaigre",
+    "hint": "",
+    "a": "vinegar",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: l'huile (f.)",
+    "hint": "",
+    "a": "oil",
+    "note": "l'huile d'olive"
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la crème",
+    "hint": "",
+    "a": "cream",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la confiture",
+    "hint": "",
+    "a": "jam",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le miel",
+    "hint": "",
+    "a": "honey",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la noix",
+    "hint": "",
+    "a": "walnut / nut",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: l'amande (f.)",
+    "hint": "",
+    "a": "almond",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la pêche",
+    "hint": "",
+    "a": "peach",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la poire",
+    "hint": "",
+    "a": "pear",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la fraise",
+    "hint": "",
+    "a": "strawberry",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la framboise",
+    "hint": "",
+    "a": "raspberry",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le raisin",
+    "hint": "",
+    "a": "grape",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la cerise",
+    "hint": "",
+    "a": "cherry",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la prune",
+    "hint": "",
+    "a": "plum",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: l'abricot (m.)",
+    "hint": "",
+    "a": "apricot",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la mangue",
+    "hint": "",
+    "a": "mango",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: l'ananas (m.)",
+    "hint": "",
+    "a": "pineapple",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la citrouille",
+    "hint": "",
+    "a": "pumpkin",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le chou",
+    "hint": "",
+    "a": "cabbage",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le chou-fleur",
+    "hint": "",
+    "a": "cauliflower",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le brocoli",
+    "hint": "",
+    "a": "broccoli",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: l'aubergine (f.)",
+    "hint": "",
+    "a": "aubergine / eggplant",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la courgette",
+    "hint": "",
+    "a": "courgette / zucchini",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le poivron",
+    "hint": "",
+    "a": "bell pepper",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: l'ail (m.)",
+    "hint": "",
+    "a": "garlic",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: l'oignon (m.)",
+    "hint": "",
+    "a": "onion",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le poireau",
+    "hint": "",
+    "a": "leek",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le champignon",
+    "hint": "",
+    "a": "mushroom",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: les épinards",
+    "hint": "",
+    "a": "spinach",
+    "note": "Always plural in French."
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le maïs",
+    "hint": "",
+    "a": "corn / maize",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le riz",
+    "hint": "",
+    "a": "rice",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: les pâtes",
+    "hint": "",
+    "a": "pasta",
+    "note": "Always plural in French."
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la soupe / le potage",
+    "hint": "",
+    "a": "soup",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le bouillon",
+    "hint": "",
+    "a": "broth / stock",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la sauce",
+    "hint": "",
+    "a": "sauce",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la pâtisserie",
+    "hint": "",
+    "a": "pastry / pastry shop",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la baguette",
+    "hint": "",
+    "a": "French baguette",
+    "note": "Symbol of French culture!"
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le croissant",
+    "hint": "",
+    "a": "croissant",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le gâteau",
+    "hint": "",
+    "a": "cake",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la tarte",
+    "hint": "",
+    "a": "tart / pie",
+    "note": "la tarte aux pommes"
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la crêpe",
+    "hint": "",
+    "a": "crepe",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le yaourt",
+    "hint": "",
+    "a": "yoghurt",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la glace",
+    "hint": "",
+    "a": "ice cream",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le chocolat",
+    "hint": "",
+    "a": "chocolate",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la bière",
+    "hint": "",
+    "a": "beer",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le jus",
+    "hint": "",
+    "a": "juice",
+    "note": "le jus d'orange"
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: le thé",
+    "hint": "",
+    "a": "tea",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: la tisane",
+    "hint": "",
+    "a": "herbal tea",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Food",
+    "level": "A2",
+    "q": "Translate: l'eau gazeuse",
+    "hint": "",
+    "a": "sparkling water",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le couloir",
+    "hint": "",
+    "a": "corridor / hallway",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le grenier",
+    "hint": "",
+    "a": "attic",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: la cave",
+    "hint": "",
+    "a": "cellar / basement",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le balcon",
+    "hint": "",
+    "a": "balcony",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le toit",
+    "hint": "",
+    "a": "roof",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le mur",
+    "hint": "",
+    "a": "wall",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le plafond",
+    "hint": "",
+    "a": "ceiling",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le sol / le plancher",
+    "hint": "",
+    "a": "floor",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: l'escalier (m.)",
+    "hint": "",
+    "a": "staircase",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: la fenêtre",
+    "hint": "",
+    "a": "window",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: la porte",
+    "hint": "",
+    "a": "door",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le loyer",
+    "hint": "",
+    "a": "rent",
+    "note": "Payer le loyer"
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le propriétaire",
+    "hint": "",
+    "a": "landlord / owner",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le locataire",
+    "hint": "",
+    "a": "tenant",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le lave-vaisselle",
+    "hint": "",
+    "a": "dishwasher",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le lave-linge",
+    "hint": "",
+    "a": "washing machine",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le sèche-linge",
+    "hint": "",
+    "a": "tumble dryer",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le réfrigérateur / le frigo",
+    "hint": "",
+    "a": "fridge",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le four",
+    "hint": "",
+    "a": "oven",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le micro-ondes",
+    "hint": "",
+    "a": "microwave",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: l'aspirateur (m.)",
+    "hint": "",
+    "a": "vacuum cleaner",
+    "note": "passer l'aspirateur"
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le miroir",
+    "hint": "",
+    "a": "mirror",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le rideau",
+    "hint": "",
+    "a": "curtain",
+    "note": "les rideaux"
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le coussin",
+    "hint": "",
+    "a": "cushion / pillow",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: la couverture",
+    "hint": "",
+    "a": "blanket",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le drap",
+    "hint": "",
+    "a": "bed sheet",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: l'oreiller (m.)",
+    "hint": "",
+    "a": "pillow",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le tableau",
+    "hint": "",
+    "a": "painting / picture",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: l'étagère (f.)",
+    "hint": "",
+    "a": "shelf / bookshelf",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Home",
+    "level": "A2",
+    "q": "Translate: le tiroir",
+    "hint": "",
+    "a": "drawer",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la rue",
+    "hint": "",
+    "a": "street",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: l'avenue (f.)",
+    "hint": "",
+    "a": "avenue",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le boulevard",
+    "hint": "",
+    "a": "boulevard",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la place",
+    "hint": "",
+    "a": "square / plaza",
+    "note": "la Place de la Bastille"
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le carrefour",
+    "hint": "",
+    "a": "crossroads",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le trottoir",
+    "hint": "",
+    "a": "pavement / sidewalk",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le feu rouge",
+    "hint": "",
+    "a": "traffic light",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le passage piéton",
+    "hint": "",
+    "a": "pedestrian crossing",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le panneau",
+    "hint": "",
+    "a": "sign / road sign",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le pont",
+    "hint": "",
+    "a": "bridge",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le musée",
+    "hint": "",
+    "a": "museum",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la bibliothèque",
+    "hint": "",
+    "a": "library",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la librairie",
+    "hint": "",
+    "a": "bookshop",
+    "note": "NB: NOT library! (false friend)"
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la poste",
+    "hint": "",
+    "a": "post office",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la mairie",
+    "hint": "",
+    "a": "town hall",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le tribunal",
+    "hint": "",
+    "a": "courthouse",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la prison",
+    "hint": "",
+    "a": "prison",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le commissariat",
+    "hint": "",
+    "a": "police station",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la caserne de pompiers",
+    "hint": "",
+    "a": "fire station",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le stade",
+    "hint": "",
+    "a": "stadium",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la piscine",
+    "hint": "",
+    "a": "swimming pool",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le parc",
+    "hint": "",
+    "a": "park",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le cimetière",
+    "hint": "",
+    "a": "cemetery",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: l'église (f.)",
+    "hint": "",
+    "a": "church",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la cathédrale",
+    "hint": "",
+    "a": "cathedral",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la mosquée",
+    "hint": "",
+    "a": "mosque",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la synagogue",
+    "hint": "",
+    "a": "synagogue",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: le théâtre",
+    "hint": "",
+    "a": "theatre",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: l'opéra (m.)",
+    "hint": "",
+    "a": "opera house",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: City",
+    "level": "A2",
+    "q": "Translate: la galerie d'art",
+    "hint": "",
+    "a": "art gallery",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la plage",
+    "hint": "",
+    "a": "beach",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: le lac",
+    "hint": "",
+    "a": "lake",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la colline",
+    "hint": "",
+    "a": "hill",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la vallée",
+    "hint": "",
+    "a": "valley",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la plaine",
+    "hint": "",
+    "a": "plain",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: le désert",
+    "hint": "",
+    "a": "desert",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la jungle",
+    "hint": "",
+    "a": "jungle",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: l'île (f.)",
+    "hint": "",
+    "a": "island",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la côte",
+    "hint": "",
+    "a": "coast",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: le rocher",
+    "hint": "",
+    "a": "rock / boulder",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: le volcan",
+    "hint": "",
+    "a": "volcano",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la cascade",
+    "hint": "",
+    "a": "waterfall",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: le coucher de soleil",
+    "hint": "",
+    "a": "sunset",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: l'aube (f.)",
+    "hint": "",
+    "a": "dawn",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: l'horizon (m.)",
+    "hint": "",
+    "a": "horizon",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: le nuage",
+    "hint": "",
+    "a": "cloud",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: le brouillard",
+    "hint": "",
+    "a": "fog",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la tempête",
+    "hint": "",
+    "a": "storm",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la foudre",
+    "hint": "",
+    "a": "lightning",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: le tonnerre",
+    "hint": "",
+    "a": "thunder",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: l'arc-en-ciel (m.)",
+    "hint": "",
+    "a": "rainbow",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la glace",
+    "hint": "",
+    "a": "ice",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la neige",
+    "hint": "",
+    "a": "snow",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la grêle",
+    "hint": "",
+    "a": "hail",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la boue",
+    "hint": "",
+    "a": "mud",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: le sable",
+    "hint": "",
+    "a": "sand",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: l'herbe (f.)",
+    "hint": "",
+    "a": "grass",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la fleur",
+    "hint": "",
+    "a": "flower",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: l'arbre (m.)",
+    "hint": "",
+    "a": "tree",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la feuille",
+    "hint": "",
+    "a": "leaf",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la branche",
+    "hint": "",
+    "a": "branch",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: la racine",
+    "hint": "",
+    "a": "root",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: le bois",
+    "hint": "",
+    "a": "wood / woods",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Nature",
+    "level": "A2",
+    "q": "Translate: l'étang (m.)",
+    "hint": "",
+    "a": "pond",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: l'aigle (m.)",
+    "hint": "",
+    "a": "eagle",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le hibou",
+    "hint": "",
+    "a": "owl",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le corbeau",
+    "hint": "",
+    "a": "crow / raven",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le canard",
+    "hint": "",
+    "a": "duck",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: l'oie (f.)",
+    "hint": "",
+    "a": "goose",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le cygne",
+    "hint": "",
+    "a": "swan",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le papillon",
+    "hint": "",
+    "a": "butterfly",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: l'abeille (f.)",
+    "hint": "",
+    "a": "bee",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le serpent",
+    "hint": "",
+    "a": "snake",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: la grenouille",
+    "hint": "",
+    "a": "frog",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: la tortue",
+    "hint": "",
+    "a": "tortoise / turtle",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le renard",
+    "hint": "",
+    "a": "fox",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le loup",
+    "hint": "",
+    "a": "wolf",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: l'ours (m.)",
+    "hint": "",
+    "a": "bear",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le cerf",
+    "hint": "",
+    "a": "deer / stag",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le lion",
+    "hint": "",
+    "a": "lion",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le tigre",
+    "hint": "",
+    "a": "tiger",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: l'éléphant (m.)",
+    "hint": "",
+    "a": "elephant",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: la girafe",
+    "hint": "",
+    "a": "giraffe",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le singe",
+    "hint": "",
+    "a": "monkey / ape",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le dauphin",
+    "hint": "",
+    "a": "dolphin",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: la baleine",
+    "hint": "",
+    "a": "whale",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Animals",
+    "level": "A2",
+    "q": "Translate: le requin",
+    "hint": "",
+    "a": "shark",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: le pull",
+    "hint": "",
+    "a": "sweater / jumper",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: le jean",
+    "hint": "",
+    "a": "jeans",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: le short",
+    "hint": "",
+    "a": "shorts",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: le costume",
+    "hint": "",
+    "a": "suit (man's)",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: le tailleur",
+    "hint": "",
+    "a": "suit (woman's)",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: le gilet",
+    "hint": "",
+    "a": "waistcoat / vest",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: l'imperméable (m.)",
+    "hint": "",
+    "a": "raincoat",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: le chapeau",
+    "hint": "",
+    "a": "hat",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: la casquette",
+    "hint": "",
+    "a": "cap",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: l'écharpe (f.)",
+    "hint": "",
+    "a": "scarf",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: les gants",
+    "hint": "",
+    "a": "gloves",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: les chaussettes",
+    "hint": "",
+    "a": "socks",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: les collants",
+    "hint": "",
+    "a": "tights / stockings",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: le soutien-gorge",
+    "hint": "",
+    "a": "bra",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: le pyjama",
+    "hint": "",
+    "a": "pyjamas",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: le maillot de bain",
+    "hint": "",
+    "a": "swimsuit / swimming trunks",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: les baskets",
+    "hint": "",
+    "a": "trainers / sneakers",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: les talons hauts",
+    "hint": "",
+    "a": "high heels",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: la ceinture",
+    "hint": "",
+    "a": "belt",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: la bague",
+    "hint": "",
+    "a": "ring",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: le collier",
+    "hint": "",
+    "a": "necklace",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: le bracelet",
+    "hint": "",
+    "a": "bracelet",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Clothes",
+    "level": "A2",
+    "q": "Translate: les boucles d'oreille",
+    "hint": "",
+    "a": "earrings",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: l'auberge de jeunesse",
+    "hint": "",
+    "a": "youth hostel",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: la chambre d'hôtes",
+    "hint": "",
+    "a": "bed and breakfast",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: le guide touristique",
+    "hint": "",
+    "a": "tour guide / guidebook",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: la visite guidée",
+    "hint": "",
+    "a": "guided tour",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: l'horaire (m.)",
+    "hint": "",
+    "a": "timetable / schedule",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: le retard",
+    "hint": "",
+    "a": "delay",
+    "note": "Le train a du retard."
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: l'escale (f.)",
+    "hint": "",
+    "a": "stopover",
+    "note": "Un vol avec escale."
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: la carte d'embarquement",
+    "hint": "",
+    "a": "boarding pass",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: le décalage horaire",
+    "hint": "",
+    "a": "jet lag",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: le visa",
+    "hint": "",
+    "a": "visa",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: l'assurance voyage",
+    "hint": "",
+    "a": "travel insurance",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: la location de voiture",
+    "hint": "",
+    "a": "car rental",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: l'autoroute (f.)",
+    "hint": "",
+    "a": "motorway / highway",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: le péage",
+    "hint": "",
+    "a": "toll",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: le rond-point",
+    "hint": "",
+    "a": "roundabout",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: le GPS",
+    "hint": "",
+    "a": "GPS / satnav",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: faire du stop",
+    "hint": "",
+    "a": "to hitchhike",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: le camping",
+    "hint": "",
+    "a": "camping",
+    "note": "faire du camping"
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: la tente",
+    "hint": "",
+    "a": "tent",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Travel",
+    "level": "B1",
+    "q": "Translate: le sac à dos",
+    "hint": "",
+    "a": "backpack",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: le tableau (blanc/noir)",
+    "hint": "",
+    "a": "(white/black)board",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: le cahier",
+    "hint": "",
+    "a": "exercise book / notebook",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: le stylo",
+    "hint": "",
+    "a": "pen",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: le crayon",
+    "hint": "",
+    "a": "pencil",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: la règle",
+    "hint": "",
+    "a": "ruler",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: la gomme",
+    "hint": "",
+    "a": "eraser",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: le dictionnaire",
+    "hint": "",
+    "a": "dictionary",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: la bibliothèque",
+    "hint": "",
+    "a": "library",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: le cartable",
+    "hint": "",
+    "a": "school bag",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: la récréation",
+    "hint": "",
+    "a": "break / recess",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: l'instituteur/trice",
+    "hint": "",
+    "a": "primary school teacher",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: le lycée",
+    "hint": "",
+    "a": "secondary school (ages 15-18)",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "A2",
+    "q": "Translate: le collège",
+    "hint": "",
+    "a": "middle school (ages 11-15)",
+    "note": "NB: NOT college in English sense!"
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "B1",
+    "q": "Translate: la dissertation",
+    "hint": "",
+    "a": "essay (academic)",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "B1",
+    "q": "Translate: le mémoire",
+    "hint": "",
+    "a": "thesis (undergraduate/masters)",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "B1",
+    "q": "Translate: la thèse",
+    "hint": "",
+    "a": "PhD thesis",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "B1",
+    "q": "Translate: la soutenance",
+    "hint": "",
+    "a": "viva / oral defence",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "B1",
+    "q": "Translate: le stage",
+    "hint": "",
+    "a": "internship / work placement",
+    "note": "faire un stage"
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "B1",
+    "q": "Translate: l'apprentissage",
+    "hint": "",
+    "a": "learning / apprenticeship",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "B1",
+    "q": "Translate: la formation",
+    "hint": "",
+    "a": "training",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "B1",
+    "q": "Translate: le concours",
+    "hint": "",
+    "a": "competitive exam",
+    "note": "Les grandes écoles nécessitent un concours."
+  },
+  {
+    "cat": "Vocabulary: Education",
+    "level": "B1",
+    "q": "Translate: les grandes écoles",
+    "hint": "",
+    "a": "elite French higher education institutions",
+    "note": "HEC, ENA, Polytechnique, Sciences Po."
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: la candidature",
+    "hint": "",
+    "a": "application (job)",
+    "note": "poser sa candidature"
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le CV / curriculum vitae",
+    "hint": "",
+    "a": "CV / resume",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: l'entretien (m.)",
+    "hint": "",
+    "a": "interview",
+    "note": "un entretien d'embauche"
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: l'embauche (f.)",
+    "hint": "",
+    "a": "hiring",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le licenciement",
+    "hint": "",
+    "a": "dismissal / layoff",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: la démission",
+    "hint": "",
+    "a": "resignation",
+    "note": "donner sa démission"
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: la retraite",
+    "hint": "",
+    "a": "retirement / pension",
+    "note": "prendre sa retraite"
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: les heures supplémentaires",
+    "hint": "",
+    "a": "overtime",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: les congés payés",
+    "hint": "",
+    "a": "paid leave",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le congé maternité/paternité",
+    "hint": "",
+    "a": "maternity/paternity leave",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le syndicat",
+    "hint": "",
+    "a": "trade union",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: la grève",
+    "hint": "",
+    "a": "strike",
+    "note": "faire grève"
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: l'effectif (m.)",
+    "hint": "",
+    "a": "workforce / staff numbers",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le chiffre d'affaires",
+    "hint": "",
+    "a": "turnover / revenue",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: les bénéfices",
+    "hint": "",
+    "a": "profits",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: la perte",
+    "hint": "",
+    "a": "loss",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: l'entreprise (f.)",
+    "hint": "",
+    "a": "company / business",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: la société",
+    "hint": "",
+    "a": "company / society",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le PDG (Président-Directeur Général)",
+    "hint": "",
+    "a": "CEO",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le conseil d'administration",
+    "hint": "",
+    "a": "board of directors",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: la réunion",
+    "hint": "",
+    "a": "meeting",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: la conférence",
+    "hint": "",
+    "a": "conference",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le rapport",
+    "hint": "",
+    "a": "report",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le projet",
+    "hint": "",
+    "a": "project",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le délai",
+    "hint": "",
+    "a": "deadline",
+    "note": "respecter les délais"
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le partenariat",
+    "hint": "",
+    "a": "partnership",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: l'accord (m.)",
+    "hint": "",
+    "a": "agreement / deal",
+    "note": "conclure un accord"
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le fournisseur",
+    "hint": "",
+    "a": "supplier",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le client",
+    "hint": "",
+    "a": "client / customer",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: la concurrence",
+    "hint": "",
+    "a": "competition",
+    "note": "faire face à la concurrence"
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le marketing",
+    "hint": "",
+    "a": "marketing",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: la publicité",
+    "hint": "",
+    "a": "advertising / advertisement",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: la marque",
+    "hint": "",
+    "a": "brand",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le produit",
+    "hint": "",
+    "a": "product",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Work",
+    "level": "B1",
+    "q": "Translate: le service",
+    "hint": "",
+    "a": "service",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: le médecin généraliste",
+    "hint": "",
+    "a": "GP / general practitioner",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: le spécialiste",
+    "hint": "",
+    "a": "specialist",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: le chirurgien",
+    "hint": "",
+    "a": "surgeon",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: l'infirmier/ière",
+    "hint": "",
+    "a": "nurse",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: la sage-femme",
+    "hint": "",
+    "a": "midwife",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: l'urgence (f.)",
+    "hint": "",
+    "a": "emergency / A&E",
+    "note": "aux urgences"
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: la consultation",
+    "hint": "",
+    "a": "doctor's appointment",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: l'opération (f.)",
+    "hint": "",
+    "a": "operation / surgery",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: la rééducation",
+    "hint": "",
+    "a": "rehabilitation / physio",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: l'allergie (f.)",
+    "hint": "",
+    "a": "allergy",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: le diabète",
+    "hint": "",
+    "a": "diabetes",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: l'hypertension (f.)",
+    "hint": "",
+    "a": "high blood pressure",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: l'infarctus (m.)",
+    "hint": "",
+    "a": "heart attack",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: le cancer",
+    "hint": "",
+    "a": "cancer",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: la fracture",
+    "hint": "",
+    "a": "fracture",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: la blessure",
+    "hint": "",
+    "a": "wound / injury",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: la cicatrice",
+    "hint": "",
+    "a": "scar",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: la fièvre",
+    "hint": "",
+    "a": "fever",
+    "note": "avoir de la fièvre"
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: la toux",
+    "hint": "",
+    "a": "cough",
+    "note": "tousser"
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: l'éternuement (m.)",
+    "hint": "",
+    "a": "sneeze",
+    "note": "éternuer"
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: le comprimé",
+    "hint": "",
+    "a": "tablet / pill",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: la gélule",
+    "hint": "",
+    "a": "capsule",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: le sirop",
+    "hint": "",
+    "a": "syrup",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: la pommade",
+    "hint": "",
+    "a": "ointment / cream",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: le pansement",
+    "hint": "",
+    "a": "bandage / plaster",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: la béquille",
+    "hint": "",
+    "a": "crutch",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Health",
+    "level": "B1",
+    "q": "Translate: le fauteuil roulant",
+    "hint": "",
+    "a": "wheelchair",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: l'écran (m.)",
+    "hint": "",
+    "a": "screen",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le clavier",
+    "hint": "",
+    "a": "keyboard",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: la souris",
+    "hint": "",
+    "a": "mouse",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le disque dur",
+    "hint": "",
+    "a": "hard drive",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le mot de passe",
+    "hint": "",
+    "a": "password",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le logiciel",
+    "hint": "",
+    "a": "software",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: l'application (f.)",
+    "hint": "",
+    "a": "app",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le navigateur",
+    "hint": "",
+    "a": "browser",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le moteur de recherche",
+    "hint": "",
+    "a": "search engine",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le téléchargement",
+    "hint": "",
+    "a": "download",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le téléversement",
+    "hint": "",
+    "a": "upload",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le Wi-Fi",
+    "hint": "",
+    "a": "Wi-Fi",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: la connexion",
+    "hint": "",
+    "a": "connection",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le réseau",
+    "hint": "",
+    "a": "network",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le serveur",
+    "hint": "",
+    "a": "server",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: la base de données",
+    "hint": "",
+    "a": "database",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le codage / la programmation",
+    "hint": "",
+    "a": "coding / programming",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: l'intelligence artificielle (f.)",
+    "hint": "",
+    "a": "artificial intelligence",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le robot",
+    "hint": "",
+    "a": "robot",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: la réalité virtuelle",
+    "hint": "",
+    "a": "virtual reality",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: l'informatique (f.)",
+    "hint": "",
+    "a": "computer science / IT",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: la cybersécurité",
+    "hint": "",
+    "a": "cybersecurity",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: les données (f.pl.)",
+    "hint": "",
+    "a": "data",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: le stockage en nuage",
+    "hint": "",
+    "a": "cloud storage",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Tech",
+    "level": "B1",
+    "q": "Translate: la vie privée / la confidentialité",
+    "hint": "",
+    "a": "privacy",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le suffrage",
+    "hint": "",
+    "a": "suffrage / vote",
+    "note": "le suffrage universel"
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le scrutin",
+    "hint": "",
+    "a": "ballot / vote",
+    "note": "le scrutin proportionnel"
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le parti politique",
+    "hint": "",
+    "a": "political party",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: la coalition",
+    "hint": "",
+    "a": "coalition",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le référendum",
+    "hint": "",
+    "a": "referendum",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: la constitution",
+    "hint": "",
+    "a": "constitution",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le sénat",
+    "hint": "",
+    "a": "senate",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: l'assemblée nationale",
+    "hint": "",
+    "a": "national assembly",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le conseil d'état",
+    "hint": "",
+    "a": "council of state",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: la cour suprême",
+    "hint": "",
+    "a": "supreme court",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le traité",
+    "hint": "",
+    "a": "treaty",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: la diplomatie",
+    "hint": "",
+    "a": "diplomacy",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: l'ambassade (f.)",
+    "hint": "",
+    "a": "embassy",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le lobby",
+    "hint": "",
+    "a": "lobby / pressure group",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: la démagogie",
+    "hint": "",
+    "a": "demagoguery",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le populisme",
+    "hint": "",
+    "a": "populism",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: la mondialisation",
+    "hint": "",
+    "a": "globalisation",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le protectionnisme",
+    "hint": "",
+    "a": "protectionism",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: les inégalités",
+    "hint": "",
+    "a": "inequalities",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: la pauvreté",
+    "hint": "",
+    "a": "poverty",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: l'exclusion sociale",
+    "hint": "",
+    "a": "social exclusion",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: l'intégration (f.)",
+    "hint": "",
+    "a": "integration",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: la discrimination",
+    "hint": "",
+    "a": "discrimination",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le racisme",
+    "hint": "",
+    "a": "racism",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le sexisme",
+    "hint": "",
+    "a": "sexism",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le féminisme",
+    "hint": "",
+    "a": "feminism",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: les droits de l'homme",
+    "hint": "",
+    "a": "human rights",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: le réfugié",
+    "hint": "",
+    "a": "refugee",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: l'asile (m.)",
+    "hint": "",
+    "a": "asylum",
+    "note": "demander l'asile"
+  },
+  {
+    "cat": "Vocabulary: Politics",
+    "level": "B2",
+    "q": "Translate: la citoyenneté",
+    "hint": "",
+    "a": "citizenship",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: le réchauffement climatique",
+    "hint": "",
+    "a": "global warming",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: les gaz à effet de serre",
+    "hint": "",
+    "a": "greenhouse gases",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: l'empreinte carbone",
+    "hint": "",
+    "a": "carbon footprint",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: les énergies renouvelables",
+    "hint": "",
+    "a": "renewable energies",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: l'énergie solaire",
+    "hint": "",
+    "a": "solar energy",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: l'énergie éolienne",
+    "hint": "",
+    "a": "wind energy",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: l'énergie hydraulique",
+    "hint": "",
+    "a": "hydroelectric energy",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: le nucléaire",
+    "hint": "",
+    "a": "nuclear energy",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: les combustibles fossiles",
+    "hint": "",
+    "a": "fossil fuels",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: la déforestation",
+    "hint": "",
+    "a": "deforestation",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: la biodiversité",
+    "hint": "",
+    "a": "biodiversity",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: l'espèce menacée",
+    "hint": "",
+    "a": "endangered species",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: l'extinction (f.)",
+    "hint": "",
+    "a": "extinction",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: le développement durable",
+    "hint": "",
+    "a": "sustainable development",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: l'écologie (f.)",
+    "hint": "",
+    "a": "ecology",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: le bilan carbone",
+    "hint": "",
+    "a": "carbon audit",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: la marée noire",
+    "hint": "",
+    "a": "oil spill",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: les déchets",
+    "hint": "",
+    "a": "waste / rubbish",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: le compost",
+    "hint": "",
+    "a": "compost",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Environment",
+    "level": "B2",
+    "q": "Translate: le tri sélectif",
+    "hint": "",
+    "a": "waste sorting",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le chef-d'œuvre",
+    "hint": "",
+    "a": "masterpiece",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: l'exposition (f.)",
+    "hint": "",
+    "a": "exhibition",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: la peinture",
+    "hint": "",
+    "a": "painting",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: la sculpture",
+    "hint": "",
+    "a": "sculpture",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: l'esquisse (f.)",
+    "hint": "",
+    "a": "sketch",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le pinceau",
+    "hint": "",
+    "a": "paintbrush",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: la toile",
+    "hint": "",
+    "a": "canvas",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: la photographie",
+    "hint": "",
+    "a": "photography",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le roman",
+    "hint": "",
+    "a": "novel",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: la nouvelle",
+    "hint": "",
+    "a": "short story",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le conte",
+    "hint": "",
+    "a": "tale / story",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: la poésie",
+    "hint": "",
+    "a": "poetry",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le poème",
+    "hint": "",
+    "a": "poem",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le vers",
+    "hint": "",
+    "a": "verse / line of poetry",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: la rime",
+    "hint": "",
+    "a": "rhyme",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: l'intrigue (f.)",
+    "hint": "",
+    "a": "plot",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le personnage",
+    "hint": "",
+    "a": "character",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le narrateur",
+    "hint": "",
+    "a": "narrator",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: la scène",
+    "hint": "",
+    "a": "scene / stage",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le décor",
+    "hint": "",
+    "a": "set / scenery",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: la mise en scène",
+    "hint": "",
+    "a": "staging / direction",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le réalisateur",
+    "hint": "",
+    "a": "director (film)",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le scénario",
+    "hint": "",
+    "a": "screenplay / script",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le tournage",
+    "hint": "",
+    "a": "filming / shooting",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: les effets spéciaux",
+    "hint": "",
+    "a": "special effects",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: la bande originale",
+    "hint": "",
+    "a": "soundtrack",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le critique",
+    "hint": "",
+    "a": "critic",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: la critique",
+    "hint": "",
+    "a": "review / criticism",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: l'avant-garde",
+    "hint": "",
+    "a": "avant-garde",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Arts",
+    "level": "B2",
+    "q": "Translate: le patrimoine",
+    "hint": "",
+    "a": "heritage",
+    "note": "le patrimoine culturel"
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la nuance",
+    "hint": "",
+    "a": "nuance",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: l'ambiguïté (f.)",
+    "hint": "",
+    "a": "ambiguity",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: le paradoxe",
+    "hint": "",
+    "a": "paradox",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la contradiction",
+    "hint": "",
+    "a": "contradiction",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: l'hypothèse (f.)",
+    "hint": "",
+    "a": "hypothesis",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la prémisse",
+    "hint": "",
+    "a": "premise",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: le raisonnement",
+    "hint": "",
+    "a": "reasoning",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: l'argument (m.)",
+    "hint": "",
+    "a": "argument",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la réfutation",
+    "hint": "",
+    "a": "refutation",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: le consensus",
+    "hint": "",
+    "a": "consensus",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la controverse",
+    "hint": "",
+    "a": "controversy",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: l'enjeu (m.)",
+    "hint": "",
+    "a": "stake / issue",
+    "note": "les enjeux sont importants"
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la portée",
+    "hint": "",
+    "a": "scope / reach / significance",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: le biais",
+    "hint": "",
+    "a": "bias",
+    "note": "un biais cognitif"
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la subjectivité",
+    "hint": "",
+    "a": "subjectivity",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: l'objectivité (f.)",
+    "hint": "",
+    "a": "objectivity",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la pertinence",
+    "hint": "",
+    "a": "relevance",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la cohérence",
+    "hint": "",
+    "a": "coherence",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la rigueur",
+    "hint": "",
+    "a": "rigour",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: le discernement",
+    "hint": "",
+    "a": "discernment",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: l'implication (f.)",
+    "hint": "",
+    "a": "implication",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la conséquence",
+    "hint": "",
+    "a": "consequence",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: l'impact (m.)",
+    "hint": "",
+    "a": "impact",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la tendance",
+    "hint": "",
+    "a": "trend",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: le phénomène",
+    "hint": "",
+    "a": "phenomenon",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la problématique",
+    "hint": "",
+    "a": "problematic / central question",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: l'approche (f.)",
+    "hint": "",
+    "a": "approach",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: le cadre",
+    "hint": "",
+    "a": "framework",
+    "note": "dans le cadre de"
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la perspective",
+    "hint": "",
+    "a": "perspective",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: le point de vue",
+    "hint": "",
+    "a": "point of view",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la remise en question",
+    "hint": "",
+    "a": "questioning / challenging",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: l'évolution (f.)",
+    "hint": "",
+    "a": "evolution / change",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la mutation",
+    "hint": "",
+    "a": "mutation / shift",
+    "note": "une mutation sociale"
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la transition",
+    "hint": "",
+    "a": "transition",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: le tournant",
+    "hint": "",
+    "a": "turning point",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la rupture",
+    "hint": "",
+    "a": "break / rupture",
+    "note": "une rupture historique"
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: l'héritage (m.)",
+    "hint": "",
+    "a": "heritage / legacy",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Abstract",
+    "level": "C1",
+    "q": "Translate: la transmission",
+    "hint": "",
+    "a": "transmission / passing on",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: se méfier de",
+    "hint": "",
+    "a": "to be wary of",
+    "note": "Je me méfie de ses intentions."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: s'interroger sur",
+    "hint": "",
+    "a": "to wonder about / question",
+    "note": "On s'interroge sur les effets."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: faire preuve de",
+    "hint": "",
+    "a": "to show / demonstrate (a quality)",
+    "note": "Il a fait preuve de patience."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: mettre en évidence",
+    "hint": "",
+    "a": "to highlight / reveal",
+    "note": "L'étude met en évidence des lacunes."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: tenir compte de",
+    "hint": "",
+    "a": "to take into account",
+    "note": "Il faut tenir compte du contexte."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: avoir recours à",
+    "hint": "",
+    "a": "to resort to / use",
+    "note": "Nous avons eu recours à un expert."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: s'avérer",
+    "hint": "",
+    "a": "to prove to be / turn out",
+    "note": "La situation s'est avérée complexe."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: pallier",
+    "hint": "",
+    "a": "to compensate for / offset",
+    "note": "Ce système pallie les inégalités."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: engendrer",
+    "hint": "",
+    "a": "to generate / give rise to",
+    "note": "Cela engendre des coûts importants."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: préconiser",
+    "hint": "",
+    "a": "to recommend / advocate",
+    "note": "Les experts préconisent des réformes."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: souligner",
+    "hint": "",
+    "a": "to underline / emphasize",
+    "note": "Il convient de souligner que…"
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: nuancer",
+    "hint": "",
+    "a": "to nuance / qualify",
+    "note": "Il faut nuancer cette affirmation."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: remettre en cause",
+    "hint": "",
+    "a": "to call into question",
+    "note": "Cela remet en cause nos hypothèses."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: aboutir à",
+    "hint": "",
+    "a": "to lead to / result in",
+    "note": "Les négociations ont abouti à un accord."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "B2",
+    "q": "Translate: s'inscrire dans",
+    "hint": "",
+    "a": "to fit into / be part of",
+    "note": "Ce projet s'inscrit dans une démarche globale."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "C1",
+    "q": "Translate: étayer",
+    "hint": "",
+    "a": "to support / substantiate (an argument)",
+    "note": "Il faut étayer sa thèse avec des preuves."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "C1",
+    "q": "Translate: corroborer",
+    "hint": "",
+    "a": "to corroborate",
+    "note": "Ces données corroborent notre hypothèse."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "C1",
+    "q": "Translate: infirmer",
+    "hint": "",
+    "a": "to disprove / refute",
+    "note": "Les résultats infirment la théorie."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "C1",
+    "q": "Translate: prévaloir",
+    "hint": "",
+    "a": "to prevail",
+    "note": "Son avis a prévalu."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "C1",
+    "q": "Translate: déférer à",
+    "hint": "",
+    "a": "to defer to",
+    "note": "Il a déféré à la décision du tribunal."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "C1",
+    "q": "Translate: se prémunir contre",
+    "hint": "",
+    "a": "to protect oneself against",
+    "note": "Se prémunir contre les risques."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "C1",
+    "q": "Translate: transiger",
+    "hint": "",
+    "a": "to compromise",
+    "note": "On ne peut transiger sur les principes."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "C1",
+    "q": "Translate: circonvenir",
+    "hint": "",
+    "a": "to circumvent",
+    "note": "Circonvenir les règles est interdit."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "C1",
+    "q": "Translate: appréhender",
+    "hint": "",
+    "a": "to apprehend / grasp (intellectually)",
+    "note": "Il est difficile d'appréhender ce phénomène."
+  },
+  {
+    "cat": "Vocabulary: Verbs",
+    "level": "C1",
+    "q": "Translate: disambiguïser",
+    "hint": "",
+    "a": "to disambiguate",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "B2",
+    "q": "Translate: accablant(e)",
+    "hint": "",
+    "a": "overwhelming / crushing",
+    "note": "Des preuves accablantes."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "B2",
+    "q": "Translate: incontournable",
+    "hint": "",
+    "a": "unavoidable / essential",
+    "note": "Un auteur incontournable."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "B2",
+    "q": "Translate: flagrant(e)",
+    "hint": "",
+    "a": "blatant / obvious",
+    "note": "Une erreur flagrante."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "B2",
+    "q": "Translate: mitigé(e)",
+    "hint": "",
+    "a": "mixed / mitigated",
+    "note": "Des résultats mitigés."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "B2",
+    "q": "Translate: décisif/décisive",
+    "hint": "",
+    "a": "decisive",
+    "note": "Un tournant décisif."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "B2",
+    "q": "Translate: ambivalent(e)",
+    "hint": "",
+    "a": "ambivalent",
+    "note": "Ses sentiments sont ambivalents."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "B2",
+    "q": "Translate: prépondérant(e)",
+    "hint": "",
+    "a": "preponderant / dominant",
+    "note": "Un rôle prépondérant."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "B2",
+    "q": "Translate: inhérent(e) à",
+    "hint": "",
+    "a": "inherent in",
+    "note": "Les risques inhérents à cette activité."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "B2",
+    "q": "Translate: subsidiaire",
+    "hint": "",
+    "a": "subsidiary / secondary",
+    "note": "Une question subsidiaire."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "B2",
+    "q": "Translate: vétuste",
+    "hint": "",
+    "a": "dilapidated / decrepit",
+    "note": "Un bâtiment vétuste."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "C1",
+    "q": "Translate: irréfutable",
+    "hint": "",
+    "a": "irrefutable",
+    "note": "Une preuve irréfutable."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "C1",
+    "q": "Translate: sibyllin(e)",
+    "hint": "",
+    "a": "cryptic / enigmatic",
+    "note": "Une réponse sibylline."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "C1",
+    "q": "Translate: péremptoire",
+    "hint": "",
+    "a": "peremptory / dismissive",
+    "note": "Un ton péremptoire."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "C1",
+    "q": "Translate: éphémère",
+    "hint": "",
+    "a": "ephemeral",
+    "note": "Une mode éphémère."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "C1",
+    "q": "Translate: lacunaire",
+    "hint": "",
+    "a": "incomplete / full of gaps",
+    "note": "Une analyse lacunaire."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "C1",
+    "q": "Translate: fallacieux/fallacieuse",
+    "hint": "",
+    "a": "fallacious / misleading",
+    "note": "Un argument fallacieux."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "C1",
+    "q": "Translate: perfide",
+    "hint": "",
+    "a": "treacherous / perfidious",
+    "note": "La perfide Albion."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "C1",
+    "q": "Translate: véhément(e)",
+    "hint": "",
+    "a": "vehement",
+    "note": "Une protestation véhémente."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "C1",
+    "q": "Translate: abscond",
+    "hint": "",
+    "a": "abstruse / obscure (abstrus)",
+    "note": "Un texte abstrus."
+  },
+  {
+    "cat": "Vocabulary: Adjectives",
+    "level": "C1",
+    "q": "Translate: aporétique",
+    "hint": "",
+    "a": "aporetic (irresolvable)",
+    "note": "Une question aporétique."
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: néanmoins",
+    "hint": "",
+    "a": "nevertheless",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: toutefois",
+    "hint": "",
+    "a": "however",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: certes",
+    "hint": "",
+    "a": "admittedly",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: davantage",
+    "hint": "",
+    "a": "more / further",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: désormais",
+    "hint": "",
+    "a": "henceforth / from now on",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: dorénavant",
+    "hint": "",
+    "a": "henceforth (more formal)",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: voire",
+    "hint": "",
+    "a": "even / indeed",
+    "note": "difficile, voire impossible"
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: notamment",
+    "hint": "",
+    "a": "notably / in particular",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: à fortiori",
+    "hint": "",
+    "a": "all the more so / a fortiori",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: en revanche",
+    "hint": "",
+    "a": "on the other hand / in return",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: en outre",
+    "hint": "",
+    "a": "moreover / furthermore",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: par ailleurs",
+    "hint": "",
+    "a": "furthermore / incidentally",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "B2",
+    "q": "Translate: quant à",
+    "hint": "",
+    "a": "as for / regarding",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "C1",
+    "q": "Translate: au demeurant",
+    "hint": "",
+    "a": "moreover / all things considered",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "C1",
+    "q": "Translate: à cet égard",
+    "hint": "",
+    "a": "in this regard",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "C1",
+    "q": "Translate: dans la mesure où",
+    "hint": "",
+    "a": "insofar as",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "C1",
+    "q": "Translate: eu égard à",
+    "hint": "",
+    "a": "with regard to",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "C1",
+    "q": "Translate: en dépit de",
+    "hint": "",
+    "a": "despite",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "C1",
+    "q": "Translate: nonobstant",
+    "hint": "",
+    "a": "notwithstanding (formal/legal)",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "C1",
+    "q": "Translate: partant",
+    "hint": "",
+    "a": "therefore / hence (literary)",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "C1",
+    "q": "Translate: dès lors",
+    "hint": "",
+    "a": "from then on / consequently",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "C1",
+    "q": "Translate: tant s'en faut",
+    "hint": "",
+    "a": "far from it",
+    "note": ""
+  },
+  {
+    "cat": "Vocabulary: Adverbs",
+    "level": "C1",
+    "q": "Translate: s'il en est",
+    "hint": "",
+    "a": "if ever there was one",
+    "note": "un problème politique s'il en est"
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "B2",
+    "q": "Translate: avoir le cafard",
+    "hint": "",
+    "a": "to feel down / depressed",
+    "note": "J'ai le cafard aujourd'hui."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "B2",
+    "q": "Translate: casser les pieds à quelqu'un",
+    "hint": "",
+    "a": "to annoy / bore someone",
+    "note": "Tu me casses les pieds!"
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "B2",
+    "q": "Translate: poser un lapin à quelqu'un",
+    "hint": "",
+    "a": "to stand someone up",
+    "note": "Il m'a posé un lapin."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "B2",
+    "q": "Translate: avoir du pain sur la planche",
+    "hint": "",
+    "a": "to have a lot on one's plate",
+    "note": "J'ai du pain sur la planche cette semaine."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "B2",
+    "q": "Translate: se mettre dans tous ses états",
+    "hint": "",
+    "a": "to get into a state / panic",
+    "note": "Ne te mets pas dans tous tes états!"
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "B2",
+    "q": "Translate: faire la sourde oreille",
+    "hint": "",
+    "a": "to turn a deaf ear",
+    "note": "Il fait la sourde oreille à nos conseils."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "B2",
+    "q": "Translate: avoir le beurre et l'argent du beurre",
+    "hint": "",
+    "a": "to have your cake and eat it",
+    "note": "On ne peut pas avoir le beurre et l'argent du beurre."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "B2",
+    "q": "Translate: couper la poire en deux",
+    "hint": "",
+    "a": "to split the difference",
+    "note": "Coupons la poire en deux."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "B2",
+    "q": "Translate: mettre les pieds dans le plat",
+    "hint": "",
+    "a": "to put one's foot in it",
+    "note": "Il a mis les pieds dans le plat."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "B2",
+    "q": "Translate: prendre le taureau par les cornes",
+    "hint": "",
+    "a": "to take the bull by the horns",
+    "note": "Il faut prendre le taureau par les cornes."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C1",
+    "q": "Translate: noyer le poisson",
+    "hint": "",
+    "a": "to muddy the waters / dodge the issue",
+    "note": "Le ministre a noyé le poisson."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C1",
+    "q": "Translate: avoir d'autres chats à fouetter",
+    "hint": "",
+    "a": "to have bigger fish to fry",
+    "note": "J'ai d'autres chats à fouetter."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C1",
+    "q": "Translate: ne pas y aller par quatre chemins",
+    "hint": "",
+    "a": "to not beat around the bush",
+    "note": "Il n'y est pas allé par quatre chemins."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C1",
+    "q": "Translate: appeler un chat un chat",
+    "hint": "",
+    "a": "to call a spade a spade",
+    "note": "Appelons un chat un chat."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C1",
+    "q": "Translate: vouloir le beurre et l'argent du beurre",
+    "hint": "",
+    "a": "to want it both ways",
+    "note": ""
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C1",
+    "q": "Translate: faire d'une pierre deux coups",
+    "hint": "",
+    "a": "to kill two birds with one stone",
+    "note": ""
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C1",
+    "q": "Translate: ménager la chèvre et le chou",
+    "hint": "",
+    "a": "to keep all parties happy / sit on the fence",
+    "note": ""
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C1",
+    "q": "Translate: tourner autour du pot",
+    "hint": "",
+    "a": "to beat around the bush",
+    "note": ""
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C1",
+    "q": "Translate: avoir le vent en poupe",
+    "hint": "",
+    "a": "to have the wind in one's sails",
+    "note": "Cette start-up a le vent en poupe."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C1",
+    "q": "Translate: être entre deux chaises",
+    "hint": "",
+    "a": "to fall between two stools",
+    "note": ""
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C2",
+    "q": "Translate: jeter de la poudre aux yeux",
+    "hint": "",
+    "a": "to pull the wool over someone's eyes",
+    "note": ""
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C2",
+    "q": "Translate: chercher midi à quatorze heures",
+    "hint": "",
+    "a": "to overcomplicate things",
+    "note": "N'allez pas chercher midi à quatorze heures!"
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C2",
+    "q": "Translate: faire feu de tout bois",
+    "hint": "",
+    "a": "to use every means available",
+    "note": "Il fait feu de tout bois pour réussir."
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C2",
+    "q": "Translate: brûler la chandelle par les deux bouts",
+    "hint": "",
+    "a": "to burn the candle at both ends",
+    "note": ""
+  },
+  {
+    "cat": "Idioms & Expressions",
+    "level": "C2",
+    "q": "Translate: avoir le diable au corps",
+    "hint": "",
+    "a": "to be possessed by energy/passion",
+    "note": ""
+  },
+  {
+    "cat": "Proverbs",
+    "level": "C1",
+    "q": "Translate: Revers of a coin: L'habit ne fait pas le moine",
+    "hint": "",
+    "a": "Clothes don't make the man",
+    "note": "Appearances can be deceptive."
+  },
+  {
+    "cat": "Proverbs",
+    "level": "C1",
+    "q": "Translate: Qui vivra verra.",
+    "hint": "",
+    "a": "Time will tell.",
+    "note": "Literally: Who will live will see."
+  },
+  {
+    "cat": "Proverbs",
+    "level": "C1",
+    "q": "Translate: Mieux vaut prévenir que guérir.",
+    "hint": "",
+    "a": "Prevention is better than cure.",
+    "note": ""
+  },
+  {
+    "cat": "Proverbs",
+    "level": "C1",
+    "q": "Translate: Vouloir c'est pouvoir.",
+    "hint": "",
+    "a": "Where there's a will there's a way.",
+    "note": ""
+  },
+  {
+    "cat": "Proverbs",
+    "level": "C1",
+    "q": "Translate: Les absents ont toujours tort.",
+    "hint": "",
+    "a": "The absent are always wrong.",
+    "note": ""
+  },
+  {
+    "cat": "Proverbs",
+    "level": "C1",
+    "q": "Translate: Chacun voit midi à sa porte.",
+    "hint": "",
+    "a": "Everyone sees things from their own perspective.",
+    "note": ""
+  },
+  {
+    "cat": "Proverbs",
+    "level": "C1",
+    "q": "Translate: Il ne faut pas vendre la peau de l'ours avant de l'avoir tué.",
+    "hint": "",
+    "a": "Don't count your chickens before they hatch.",
+    "note": ""
+  },
+  {
+    "cat": "Proverbs",
+    "level": "C1",
+    "q": "Translate: Après la pluie, le beau temps.",
+    "hint": "",
+    "a": "Every cloud has a silver lining.",
+    "note": ""
+  },
+  {
+    "cat": "Proverbs",
+    "level": "C2",
+    "q": "Translate: Pierre qui roule n'amasse pas mousse.",
+    "hint": "",
+    "a": "A rolling stone gathers no moss.",
+    "note": ""
+  },
+  {
+    "cat": "Proverbs",
+    "level": "C2",
+    "q": "Translate: Qui ne risque rien n'a rien.",
+    "hint": "",
+    "a": "Nothing ventured, nothing gained.",
+    "note": ""
+  },
+  {
+    "cat": "Proverbs",
+    "level": "C2",
+    "q": "Translate: Les chiens aboient, la caravane passe.",
+    "hint": "",
+    "a": "The dogs bark but the caravan moves on.",
+    "note": ""
+  },
+  {
+    "cat": "Proverbs",
+    "level": "C2",
+    "q": "Translate: Nul n'est prophète en son pays.",
+    "hint": "",
+    "a": "No man is a prophet in his own land.",
+    "note": ""
+  },
+  {
+    "cat": "Pronunciation",
+    "level": "A1",
+    "q": "Translate: Le e caduc (schwa)",
+    "hint": "",
+    "a": "Silent or near-silent 'e'",
+    "note": "je, le, ce, de can drop the 'e' in speech: j'sais pas, l'ami."
+  },
+  {
+    "cat": "Pronunciation",
+    "level": "A1",
+    "q": "Translate: La liaison obligatoire: les enfants",
+    "hint": "",
+    "a": "les_enfants [lɛzɑ̃fɑ̃]",
+    "note": "Liaison between les/des/mes/etc. + vowel-starting word."
+  },
+  {
+    "cat": "Pronunciation",
+    "level": "A2",
+    "q": "Translate: La liaison interdite: et + vowel",
+    "hint": "",
+    "a": "No liaison with 'et'",
+    "note": "et il [e il] NOT [e til]"
+  },
+  {
+    "cat": "Pronunciation",
+    "level": "B1",
+    "q": "Translate: Le son nasale: an/en, in/ain, on, un",
+    "hint": "",
+    "a": "[ɑ̃], [ɛ̃], [ɔ̃], [œ̃]",
+    "note": "blanc, vin, bon, brun — nasalised vowels."
+  },
+  {
+    "cat": "Pronunciation",
+    "level": "B1",
+    "q": "Translate: L'enchaînement",
+    "hint": "",
+    "a": "Linking of words without liaison",
+    "note": "une_amie: the 'e' of une links to amie [yn ami]"
+  },
+  {
+    "cat": "Pronunciation",
+    "level": "B2",
+    "q": "Translate: The letter H: aspiré vs muet",
+    "hint": "",
+    "a": "h aspiré = no liaison/elision; h muet = liaison/elision applies",
+    "note": "les héros [le eʁo] (aspiré) vs les hommes [lɛzɔm] (muet)"
+  },
+  {
+    "cat": "Pronunciation",
+    "level": "C1",
+    "q": "Translate: Les accents et leur rôle",
+    "hint": "",
+    "a": "é, è, ê, ë, â, î, ô, û, ù, ç",
+    "note": "é [e]; è/ê [ɛ]; â lengthens; ç = s sound; ë/ï = diaeresis (separate vowels)."
+  }
+];
+
+</script>
+
+<!-- ─── APP LOGIC ─────────────────────────────────────── -->
+<script>
+const LEVEL_STYLES = {
+  A1: { bg: '#d4e8db', color: '#3d6b50', color2: '#5a9e73' },
+  A2: { bg: '#d8e4f0', color: '#2c3e52', color2: '#4a6a8a' },
+  B1: { bg: '#e8d9b0', color: '#7a5c14', color2: '#b8922a' },
+  B2: { bg: '#f2d9dc', color: '#8b2635', color2: '#c0404f' },
+  C1: { bg: '#e8d9f0', color: '#5c3472', color2: '#8b52a6' },
+  C2: { bg: '#0f0e0a', color: '#f9f6f0', color2: '#b8922a' },
+};
+
+let activeLevel = 'All';
+let activeCat = 'All';
+let deck = [];
+let idx = 0;
+let isFlipped = false;
+let scores = { hard: 0, good: 0, easy: 0, total: 0 };
+
+function buildDeck() {
+  deck = ALL_CARDS.filter(c => {
+    const lvOk = activeLevel === 'All' || c.level === activeLevel;
+    const catOk = activeCat === 'All' || c.cat === activeCat;
+    return lvOk && catOk;
+  });
+  idx = 0;
+}
+
+function allCategories() {
+  const src = activeLevel === 'All' ? ALL_CARDS : ALL_CARDS.filter(c => c.level === activeLevel);
+  const cats = ['All', ...new Set(src.map(c => c.cat))];
+  return cats;
+}
+
+function buildCatFilter() {
+  const div = document.getElementById('cat-filter');
+  div.innerHTML = '';
+  allCategories().forEach(cat => {
+    const b = document.createElement('button');
+    b.className = 'cat-btn' + (cat === activeCat ? ' active' : '');
+    b.textContent = cat;
+    b.onclick = () => { activeCat = cat; buildCatFilter(); buildDeck(); render(); };
+    div.appendChild(b);
+  });
+  document.getElementById('cat-count').textContent = allCategories().length - 1;
+}
+
+function render() {
+  if (!deck.length) return;
+  const c = deck[idx];
+  const s = LEVEL_STYLES[c.level] || LEVEL_STYLES.B1;
+
+  // front
+  const fb = document.getElementById('f-badge');
+  fb.textContent = c.level;
+  fb.style.background = s.bg;
+  fb.style.color = s.color;
+
+  document.getElementById('f-cat').textContent = c.cat;
+  document.getElementById('f-q').textContent = c.q;
+  document.getElementById('f-hint').textContent = c.hint || '';
+
+  // back
+  const bb = document.getElementById('b-badge');
+  bb.textContent = c.level;
+
+  document.getElementById('b-cat').textContent = c.cat;
+  document.getElementById('b-ans').textContent = c.a;
+  document.getElementById('b-note').textContent = c.note || '';
+
+  // card top stripe
+  const cardFront = document.querySelector('.card-front');
+  cardFront.style.setProperty('--level-color', s.color);
+  cardFront.style.setProperty('--level-color2', s.color2);
+  cardFront.style.cssText += `--level-bg:${s.bg};--level-color:${s.color};`;
+
+  // reset flip state
+  isFlipped = false;
+  document.getElementById('card').classList.remove('flipped');
+  document.getElementById('score-row').classList.remove('visible');
+
+  // progress
+  const pct = Math.round(((idx + 1) / deck.length) * 100);
+  document.getElementById('prog-text').textContent = `Card ${idx + 1} of ${deck.length}`;
+  document.getElementById('prog-pct').textContent = `${pct}%`;
+  document.getElementById('prog-fill').style.width = `${pct}%`;
+
+  // re-trigger animation
+  const w = document.getElementById('card-wrapper');
+  w.style.animation = 'none';
+  requestAnimationFrame(() => { w.style.animation = ''; });
+}
+
+function flip() {
+  isFlipped = !isFlipped;
+  document.getElementById('card').classList.toggle('flipped', isFlipped);
+  document.getElementById('score-row').classList.toggle('visible', isFlipped);
+}
+
+function next() {
+  idx = (idx + 1) % deck.length;
+  render();
+}
+
+function prev() {
+  idx = (idx - 1 + deck.length) % deck.length;
+  render();
+}
+
+function rate(level) {
+  scores[level]++;
+  scores.total++;
+  document.getElementById('cnt-' + level).textContent = scores[level];
+  document.getElementById('cnt-total').textContent = scores.total;
+  next();
+}
+
+function setLevel(lv) {
+  activeLevel = lv;
+  activeCat = 'All';
+  document.querySelectorAll('.level-btn').forEach(b => b.classList.toggle('active', b.dataset.lv === lv));
+  buildCatFilter();
+  buildDeck();
+  render();
+  document.getElementById('total-count').textContent = deck.length;
+}
+
+function shuffle() {
+  for (let i = deck.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [deck[i], deck[j]] = [deck[j], deck[i]];
+  }
+  idx = 0;
+  render();
+}
+
+// Keyboard
+document.addEventListener('keydown', e => {
+  if (e.key === 'ArrowRight') next();
+  else if (e.key === 'ArrowLeft') prev();
+  else if (e.key === ' ' || e.key === 'Enter') { e.preventDefault(); flip(); }
+  else if (e.key === '1') rate('hard');
+  else if (e.key === '2') rate('good');
+  else if (e.key === '3') rate('easy');
+});
+
+// Init
+setLevel('All');
+</script>
+
+</body>
+</html>
